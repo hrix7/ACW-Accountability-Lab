@@ -1,0 +1,5 @@
+[
+  {"id":"synthetic-limited-control","kind":"synthetic","scores":{"understand":0.4,"predict":0.3,"override":0.1,"time":0.2,"audit":0.2}},
+  {"id":"synthetic-reviewed-defence","kind":"synthetic","scores":{"understand":0.9,"predict":0.9,"override":0.95,"time":0.85,"audit":0.95}},
+  {"id":"synthetic-incomplete-evidence","kind":"synthetic","scores":{"understand":0.4,"predict":null,"override":null,"time":0.2,"audit":null}}
+]

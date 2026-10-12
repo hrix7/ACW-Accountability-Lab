@@ -1,0 +1,236 @@
+[
+  {
+    "id": "synthetic-limited-control",
+    "title": "Synthetic Limited Control",
+    "scope": "Invented bounded scenario for software demonstration only.",
+    "assessed_on": "2026-10-12",
+    "synthetic": true,
+    "sources": [],
+    "control": {
+      "understand": {
+        "value": 0.4,
+        "rationale": "Constructed example, not an observed system.",
+        "confidence": "unknown",
+        "source_ids": []
+      },
+      "predict": {
+        "value": 0.3,
+        "rationale": "Constructed example, not an observed system.",
+        "confidence": "unknown",
+        "source_ids": []
+      },
+      "override": {
+        "value": 0.1,
+        "rationale": "Constructed example, not an observed system.",
+        "confidence": "unknown",
+        "source_ids": []
+      },
+      "time": {
+        "value": 0.2,
+        "rationale": "Constructed example, not an observed system.",
+        "confidence": "unknown",
+        "source_ids": []
+      },
+      "audit": {
+        "value": 0.2,
+        "rationale": "Constructed example, not an observed system.",
+        "confidence": "unknown",
+        "source_ids": []
+      }
+    },
+    "risk": {
+      "autonomy": {
+        "value": 3,
+        "rationale": "Constructed example to demonstrate profile storage.",
+        "confidence": "unknown",
+        "source_ids": []
+      },
+      "propagation": {
+        "value": 3,
+        "rationale": "Constructed example to demonstrate profile storage.",
+        "confidence": "unknown",
+        "source_ids": []
+      },
+      "target_selection": {
+        "value": 3,
+        "rationale": "Constructed example to demonstrate profile storage.",
+        "confidence": "unknown",
+        "source_ids": []
+      },
+      "irreversibility": {
+        "value": 3,
+        "rationale": "Constructed example to demonstrate profile storage.",
+        "confidence": "unknown",
+        "source_ids": []
+      },
+      "attribution_difficulty": {
+        "value": 3,
+        "rationale": "Constructed example to demonstrate profile storage.",
+        "confidence": "unknown",
+        "source_ids": []
+      },
+      "civilian_exposure": {
+        "value": 3,
+        "rationale": "Constructed example to demonstrate profile storage.",
+        "confidence": "unknown",
+        "source_ids": []
+      }
+    }
+  },
+  {
+    "id": "synthetic-reviewed-defence",
+    "title": "Synthetic Reviewed Defence",
+    "scope": "Invented bounded scenario for software demonstration only.",
+    "assessed_on": "2026-10-12",
+    "synthetic": true,
+    "sources": [],
+    "control": {
+      "understand": {
+        "value": 0.9,
+        "rationale": "Constructed example, not an observed system.",
+        "confidence": "unknown",
+        "source_ids": []
+      },
+      "predict": {
+        "value": 0.9,
+        "rationale": "Constructed example, not an observed system.",
+        "confidence": "unknown",
+        "source_ids": []
+      },
+      "override": {
+        "value": 0.95,
+        "rationale": "Constructed example, not an observed system.",
+        "confidence": "unknown",
+        "source_ids": []
+      },
+      "time": {
+        "value": 0.85,
+        "rationale": "Constructed example, not an observed system.",
+        "confidence": "unknown",
+        "source_ids": []
+      },
+      "audit": {
+        "value": 0.95,
+        "rationale": "Constructed example, not an observed system.",
+        "confidence": "unknown",
+        "source_ids": []
+      }
+    },
+    "risk": {
+      "autonomy": {
+        "value": 1,
+        "rationale": "Constructed example to demonstrate profile storage.",
+        "confidence": "unknown",
+        "source_ids": []
+      },
+      "propagation": {
+        "value": 1,
+        "rationale": "Constructed example to demonstrate profile storage.",
+        "confidence": "unknown",
+        "source_ids": []
+      },
+      "target_selection": {
+        "value": 1,
+        "rationale": "Constructed example to demonstrate profile storage.",
+        "confidence": "unknown",
+        "source_ids": []
+      },
+      "irreversibility": {
+        "value": 1,
+        "rationale": "Constructed example to demonstrate profile storage.",
+        "confidence": "unknown",
+        "source_ids": []
+      },
+      "attribution_difficulty": {
+        "value": 1,
+        "rationale": "Constructed example to demonstrate profile storage.",
+        "confidence": "unknown",
+        "source_ids": []
+      },
+      "civilian_exposure": {
+        "value": 1,
+        "rationale": "Constructed example to demonstrate profile storage.",
+        "confidence": "unknown",
+        "source_ids": []
+      }
+    }
+  },
+  {
+    "id": "synthetic-incomplete-evidence",
+    "title": "Synthetic Incomplete Evidence",
+    "scope": "Invented bounded scenario for software demonstration only.",
+    "assessed_on": "2026-10-12",
+    "synthetic": true,
+    "sources": [],
+    "control": {
+      "understand": {
+        "value": 0.4,
+        "rationale": "Constructed example, not an observed system.",
+        "confidence": "unknown",
+        "source_ids": []
+      },
+      "predict": {
+        "value": null,
+        "rationale": "Constructed example, not an observed system.",
+        "confidence": "unknown",
+        "source_ids": []
+      },
+      "override": {
+        "value": null,
+        "rationale": "Constructed example, not an observed system.",
+        "confidence": "unknown",
+        "source_ids": []
+      },
+      "time": {
+        "value": 0.2,
+        "rationale": "Constructed example, not an observed system.",
+        "confidence": "unknown",
+        "source_ids": []
+      },
+      "audit": {
+        "value": null,
+        "rationale": "Constructed example, not an observed system.",
+        "confidence": "unknown",
+        "source_ids": []
+      }
+    },
+    "risk": {
+      "autonomy": {
+        "value": null,
+        "rationale": "Constructed example to demonstrate profile storage.",
+        "confidence": "unknown",
+        "source_ids": []
+      },
+      "propagation": {
+        "value": null,
+        "rationale": "Constructed example to demonstrate profile storage.",
+        "confidence": "unknown",
+        "source_ids": []
+      },
+      "target_selection": {
+        "value": null,
+        "rationale": "Constructed example to demonstrate profile storage.",
+        "confidence": "unknown",
+        "source_ids": []
+      },
+      "irreversibility": {
+        "value": null,
+        "rationale": "Constructed example to demonstrate profile storage.",
+        "confidence": "unknown",
+        "source_ids": []
+      },
+      "attribution_difficulty": {
+        "value": null,
+        "rationale": "Constructed example to demonstrate profile storage.",
+        "confidence": "unknown",
+        "source_ids": []
+      },
+      "civilian_exposure": {
+        "value": null,
+        "rationale": "Constructed example to demonstrate profile storage.",
+        "confidence": "unknown",
+        "source_ids": []
+      }
+    }
+  }
+]
