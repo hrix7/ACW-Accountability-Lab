@@ -4,6 +4,7 @@ import html
 import json
 from pathlib import Path
 from mhc import DIMENSIONS, DEFAULT_WEIGHTS, unit, weights, score, sensitivity
+from strict_json import load_json
 
 RISK_FIELDS = ('autonomy', 'propagation', 'target_selection', 'irreversibility',
                'attribution_difficulty', 'civilian_exposure')
@@ -27,6 +28,8 @@ def validate_case(case):
         raise ValueError('sources must be a list')
     ids = []
     for source in sources:
+        if not isinstance(source, dict):
+            raise ValueError('Each source must be an object')
         for field in ('id', 'title', 'url', 'locator'):
             text_field(source.get(field), f'source.{field}')
         if not source['url'].startswith(('https://', 'http://')):
@@ -41,7 +44,9 @@ def validate_case(case):
         for key, rating in ratings.items():
             if not isinstance(rating, dict):
                 raise ValueError(f'{key} must be a rating object')
-            value = rating.get('value')
+            if 'value' not in rating:
+                raise ValueError(f'{key} requires an explicit value (use null for unknown)')
+            value = rating['value']
             if value is not None:
                 if group == 'control':
                     unit(value)
@@ -116,10 +121,10 @@ def main():
     parser.add_argument('--html', type=Path, default=Path('reports/assessment.html'))
     args = parser.parse_args()
     try:
-        cases = json.loads(args.input.read_text())
+        cases = load_json(args.input)
         if not isinstance(cases, list) or not cases:
             raise ValueError('Input must be a nonempty case list')
-        config = json.loads(args.config.read_text()) if args.config else {}
+        config = load_json(args.config) if args.config else {}
         if not isinstance(config, dict) or not set(config) <= {'weights', 'threshold', 'floors'}:
             raise ValueError('Unknown configuration keys')
         results = [evaluate(case, config.get('threshold'), config.get('weights'), config.get('floors')) for case in cases]

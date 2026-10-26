@@ -22,6 +22,66 @@ To explore an explicitly chosen threshold and component floors:
 python project.py --config data/example_config.json
 ```
 
+Generate an accessible side-by-side comparison of the synthetic examples:
+
+```bash
+python compare.py
+python compare.py --config data/example_config.json
+```
+
+Open `reports/comparison.html`, or inspect the auditable matrix in
+`reports/comparison.json`. Unknown values stay unknown, and ordinal risk
+dimensions are displayed separately rather than collapsed into a risk score.
+
+Validate a case dataset and optionally export a protected copy:
+
+```bash
+python case_io.py --input data/case_records.json
+python case_io.py --input data/case_records.json --output my_cases.json
+```
+
+Export requires a new filename and never replaces an existing file. Assessment,
+comparison and case-copy commands reject duplicate JSON keys and non-finite
+numbers. Explicit `null` is retained as unknown; a missing `value` field is an
+error. These checks validate structure and references, not source truth or
+numeric scoring conventions.
+
+Edit one synthetic control or risk rating through a preview-and-confirm flow:
+
+```bash
+python editor.py --input data/case_records.json --output edited_cases.json
+python project.py --input edited_cases.json
+```
+
+The editor is deliberately limited to synthetic cases. It requires a rationale
+and confidence label, preserves evidence links, supports explicit unknowns, and
+exports through the same protected new-file path. Cancellation or anything
+other than an exact `yes` confirmation writes nothing.
+
+Preview several synthetic edits as one auditable draft:
+
+```bash
+python draft.py --draft data/example_draft.json --output drafted_cases.json
+python draft.py --draft data/example_draft.json --output drafted_cases.json --confirm
+```
+
+The first command prints the ordered before/after change list and writes
+nothing. The confirmed command validates every change before protected export;
+one invalid entry rejects the entire draft. Repeated targets are rejected so
+the audit trail remains unambiguous.
+
+Open a loopback-only, read-only browser view:
+
+```bash
+python viewer.py --draft data/example_draft.json
+```
+
+Then visit `http://127.0.0.1:8000`. The viewer shows comparison tables,
+evidence records and the draft audit. It accepts only GET/HEAD requests, exposes
+no write endpoint, adds restrictive browser headers and refuses non-loopback
+hosts. Use `python viewer.py --draft data/example_draft.json --check` to validate
+and render in memory without starting a server.
+
 `data/case_records.json` contains three synthetic examples. Copy their structure to create a case dataset and pass `--input my_cases.json`. The original small control calculator remains available as `python mhc.py`; its default 0.87 threshold is legacy and illustrative. The main project has no default approval threshold.
 
 ## Working now
@@ -32,7 +92,9 @@ python project.py --config data/example_config.json
 - Unknown evidence preserved as null, with a possible score interval rather than an invented point estimate.
 - Separate component-floor checks so an average cannot hide a failed control requirement.
 - Weight sensitivity analysis and JSON/HTML report exports.
-- Input validation, 17 automated tests, and a GitHub Actions workflow ready for publication.
+- Side-by-side accessible JSON/HTML case comparison.
+- Strict dataset import, guarded editing and a read-only local viewer, 68 automated tests, and a GitHub
+  Actions workflow.
 
 ## Full project scope
 
@@ -40,8 +102,8 @@ python project.py --config data/example_config.json
 |---|---|---|
 | Assessment engine | Working | Versioned scoring conventions and reviewer feedback |
 | Case and evidence records | Working JSON format | Source-backed real cases and evidence review |
-| Reports | Working HTML + JSON export | Comparative views and accessible visual summaries |
-| Assessment interface | CLI working | Interactive case editor, import/export and comparison |
+| Reports | Assessment and accessible comparison HTML + JSON | Additional visual summaries |
+| Assessment interface | Assessment, comparison, guarded editing and read-only browser viewing | Source management and browser editing |
 | Validation | Software tests passing | Independent ratings, disagreement analysis and sensitivity study |
 | Research documentation | Initial method and roadmap | Literature-backed anchors and reproducible case study |
 

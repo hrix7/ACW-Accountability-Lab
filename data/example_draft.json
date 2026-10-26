@@ -1,0 +1,18 @@
+[
+  {
+    "case_id": "synthetic-limited-control",
+    "group": "control",
+    "dimension": "override",
+    "value": 0.25,
+    "rationale": "Synthetic draft example for workflow demonstration only.",
+    "confidence": "unknown"
+  },
+  {
+    "case_id": "synthetic-incomplete-evidence",
+    "group": "risk",
+    "dimension": "civilian_exposure",
+    "value": null,
+    "rationale": "Synthetic example retains an explicit unknown value.",
+    "confidence": "unknown"
+  }
+]
