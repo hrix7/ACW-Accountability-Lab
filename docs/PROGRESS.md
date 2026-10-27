@@ -1,5 +1,25 @@
 # Progress log
 
+## 2026-10-26 — Report reproducibility metadata
+
+- Verified GitHub repository and README and read current roadmap, progress and
+  input gates. No applicable AGENTS.md was found. Conference-Publications was
+  untouched. The remote publication commit contains the same files as the five
+  prior local commits; this update is based on that remote commit.
+- Added shared deterministic fingerprints of the loaded dataset and supplied
+  configuration, plus explicit normalized weights, threshold and numeric floors.
+  Assessment/comparison JSON, HTML and browser comparison views expose metadata.
+- Fingerprints describe parsed inputs, not original bytes, source authenticity
+  or validated research. No scoring values, synthetic labels or evidence changed.
+- Verification: 75 tests pass, including seven new reproducibility tests and
+  default/configured CLI report checks. Viewer check and diff whitespace checks
+  pass. Research gates remain pending a second rater and reviewed scoring choices.
+- Prior local-only entries describe their original runs; those five updates are
+  now published together in remote commit a4a2b72499be805add1c658b7b4d0730b5b8bf15.
+- This tested update is prepared for GitHub publication; publication and remote
+  SHA verification are reported in the run result rather than presumed here.
+- Next: versioned synthetic dataset manifest and verification command.
+
 ## 2026-10-25 — Read-only local browser viewer
 
 - Verified the standalone GitHub repository and project README; read the

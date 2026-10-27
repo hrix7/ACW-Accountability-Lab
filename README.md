@@ -84,6 +84,25 @@ and render in memory without starting a server.
 
 `data/case_records.json` contains three synthetic examples. Copy their structure to create a case dataset and pass `--input my_cases.json`. The original small control calculator remains available as `python mhc.py`; its default 0.87 threshold is legacy and illustrative. The main project has no default approval threshold.
 
+## Reproducing a report
+
+Assessment and comparison JSON exports include `provenance`; their HTML exports
+and the local viewer display the same metadata. It records a SHA-256 fingerprint
+of the loaded dataset, a fingerprint of the supplied configuration, and the
+actual normalized weights, threshold and numeric component floors used.
+
+Fingerprints use Python JSON serialization with sorted object keys, compact
+separators, UTF-8, unescaped Unicode and non-finite numbers rejected. JSON
+whitespace and object key order do not affect them; case order, numeric
+representation (for example `1` versus `1.0`), unknowns and evidence text do.
+An omitted configuration is fingerprinted as `{}`. These are parsed-input
+fingerprints, not hashes of original file bytes or evidence verification.
+
+Retain the input files and repository commit alongside an exported report.
+Rerun the command with those files and compare the `provenance` fields; the
+existing `model_version` identifies the scoring model, not the software commit.
+No timestamps, local paths or private environment information are added.
+
 ## Working now
 
 - Six-dimensional risk profiles, stored separately from human-control scores.
@@ -93,7 +112,7 @@ and render in memory without starting a server.
 - Separate component-floor checks so an average cannot hide a failed control requirement.
 - Weight sensitivity analysis and JSON/HTML report exports.
 - Side-by-side accessible JSON/HTML case comparison.
-- Strict dataset import, guarded editing and a read-only local viewer, 68 automated tests, and a GitHub
+- Strict dataset import, guarded editing and a read-only local viewer, 75 automated tests, and a GitHub
   Actions workflow.
 
 ## Full project scope

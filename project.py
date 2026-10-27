@@ -5,6 +5,7 @@ import json
 from pathlib import Path
 from mhc import DIMENSIONS, DEFAULT_WEIGHTS, unit, weights, score, sensitivity
 from strict_json import load_json
+from provenance import build_provenance, render_provenance
 
 RISK_FIELDS = ('autonomy', 'propagation', 'target_selection', 'irreversibility',
                'attribution_difficulty', 'civilian_exposure')
@@ -111,7 +112,7 @@ def render_report(report):
             f'<p>Component checks: {esc(result["component_floors"])}</p>'
             f'<table><tr><th>Risk dimension (0–3)</th><th>Rating</th></tr>{rows}</table>'
             f'<details><summary>Evidence and calculation details</summary><pre>{esc(json.dumps(result, indent=2))}</pre></details></section>')
-    return '<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ACW Accountability Lab report</title><style>body{font:16px system-ui;background:#131018;color:#f4e9e7;max-width:1000px;margin:40px auto;padding:0 20px}section{border:1px solid #795260;border-radius:12px;padding:24px;margin:20px 0}h1,h2{color:#efb7ca}td,th{text-align:left;padding:8px 20px 8px 0}pre{white-space:pre-wrap;overflow-wrap:anywhere}summary{cursor:pointer;margin-top:20px}</style><h1>ACW Accountability Lab</h1><p>Exploratory research profiles. Ratings and thresholds are unvalidated; risk dimensions are not combined into a probability or compliance verdict.</p>'+''.join(sections)+'</html>'
+    return '<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ACW Accountability Lab report</title><style>body{font:16px system-ui;background:#131018;color:#f4e9e7;max-width:1000px;margin:40px auto;padding:0 20px}section{border:1px solid #795260;border-radius:12px;padding:24px;margin:20px 0}h1,h2{color:#efb7ca}td,th{text-align:left;padding:8px 20px 8px 0}pre{white-space:pre-wrap;overflow-wrap:anywhere}summary{cursor:pointer;margin-top:20px}</style><h1>ACW Accountability Lab</h1><p>Exploratory research profiles. Ratings and thresholds are unvalidated; risk dimensions are not combined into a probability or compliance verdict.</p>'+render_provenance(report.get('provenance'))+''.join(sections)+'</html>'
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
@@ -130,7 +131,8 @@ def main():
         results = [evaluate(case, config.get('threshold'), config.get('weights'), config.get('floors')) for case in cases]
         if len({r['id'] for r in results}) != len(results):
             raise ValueError('Case IDs must be unique')
-        report = {'model_version': '0.2.0', 'results': results}
+        report = {'model_version': '0.2.0', 'results': results,
+                  'provenance': build_provenance(cases, config)}
         for path, content in ((args.output, json.dumps(report, indent=2, allow_nan=False)+'\n'),
                               (args.html, render_report(report))):
             path.parent.mkdir(parents=True, exist_ok=True)

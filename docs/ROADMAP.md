@@ -75,3 +75,15 @@ Do not use conference publication metadata as the project backlog. Scheduled wor
 - Next work needs input: identify a second rater and review weights, component
   floors, thresholds and rating anchors before disagreement or sensitivity
   findings are treated as research results.
+
+## 2026-10-26 checkpoint
+
+- Advanced repeatable evaluation with deterministic dataset/config fingerprints
+  and explicit effective scoring settings in assessment/comparison JSON and HTML.
+  The read-only viewer inherits the same comparison metadata.
+- Regression checks establish matching metadata across both report workflows,
+  sensitivity to input changes and preservation of unknowns and synthetic data.
+- Next: a versioned synthetic dataset manifest and verification command. This
+  software preparation does not complete the research-dependent release gate.
+- Independent research validation remains pending a second rater and reviewed
+  weights, floors, thresholds and rating anchors; no agreement is presumed.

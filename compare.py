@@ -7,6 +7,7 @@ from pathlib import Path
 from mhc import DIMENSIONS
 from project import RISK_FIELDS, evaluate, validate_case
 from strict_json import load_json
+from provenance import build_provenance, render_provenance
 
 
 def build_comparison(cases, config=None):
@@ -46,6 +47,7 @@ def build_comparison(cases, config=None):
             'missing_risk': result['missing_risk']})
     return {
         'model_version': '0.2.0',
+        'provenance': build_provenance(cases, config),
         'notice': ('Exploratory comparison. Sources are supplied, not independently '
                    'verified; weights, floors and thresholds are unvalidated. Risk '
                    'dimensions remain ordinal and are not aggregated.'),
@@ -84,7 +86,8 @@ def render_comparison(comparison):
             'h1,h2{color:#efb7ca}table{border-collapse:collapse;width:100%;margin:18px 0 34px;overflow:auto}'
             'th,td{border:1px solid #795260;padding:10px;text-align:left}th{background:#241923}'
             '.notice{border-left:4px solid #efb7ca;padding:10px 14px;background:#241923}</style>'
-            '<h1>ACW case comparison</h1><p class="notice">' + esc(comparison['notice']) + '</p>'
+            '<h1>ACW case comparison</h1><p class="notice">' + esc(comparison['notice']) + '</p>' +
+            render_provenance(comparison.get('provenance')) +
             '<h2>Assessment summary</h2><table><thead><tr><th scope="col">Measure</th>' + headings +
             '</tr></thead><tbody>' + ''.join(summary_rows) + '</tbody></table>'
             '<h2>Human-control dimensions (0–1)</h2><table><thead><tr><th scope="col">Dimension</th>' +
