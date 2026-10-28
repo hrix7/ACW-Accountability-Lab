@@ -103,6 +103,28 @@ Rerun the command with those files and compare the `provenance` fields; the
 existing `model_version` identifies the scoring model, not the software commit.
 No timestamps, local paths or private environment information are added.
 
+## Verifying the synthetic dataset
+
+```bash
+python dataset_manifest.py
+```
+
+This read-only command checks `data/case_records.json` against the versioned
+`data/synthetic_manifest.json` (dataset `acw-synthetic-examples`, version `1.0.0`).
+It validates the records, requires every case to be explicitly synthetic, and
+checks ordered case IDs and the same parsed-input fingerprint used in reports.
+Use `--input FILE --manifest FILE` to verify an explicitly selected pair.
+Success exits 0; malformed inputs or mismatches exit 2 without writing files.
+
+The dataset version is independent of the scoring model version. Retain the
+manifest and data together at a repository commit. For an intentional dataset
+revision, review the full data diff, assign a new dataset version and update the
+manifest digest and ordered IDs in the same commit. Do not regenerate the
+manifest merely to silence a mismatch. Verification compares against a trusted
+manifest; changing both data and manifest can produce a match. It does not
+verify source truth, scoring validity, or the correctness of a version label.
+This initial manifest covers the three existing synthetic examples only.
+
 ## Working now
 
 - Six-dimensional risk profiles, stored separately from human-control scores.
@@ -112,7 +134,7 @@ No timestamps, local paths or private environment information are added.
 - Separate component-floor checks so an average cannot hide a failed control requirement.
 - Weight sensitivity analysis and JSON/HTML report exports.
 - Side-by-side accessible JSON/HTML case comparison.
-- Strict dataset import, guarded editing and a read-only local viewer, 75 automated tests, and a GitHub
+- Strict dataset import, guarded editing and a read-only local viewer, 83 automated tests, and a GitHub
   Actions workflow.
 
 ## Full project scope

@@ -87,3 +87,15 @@ Do not use conference publication metadata as the project backlog. Scheduled wor
   software preparation does not complete the research-dependent release gate.
 - Independent research validation remains pending a second rater and reviewed
   weights, floors, thresholds and rating anchors; no agreement is presumed.
+
+## 2026-10-27 checkpoint
+
+- Added a versioned manifest for the existing synthetic dataset and a read-only
+  verification command. Strict schema checks, ordered case IDs, synthetic-only
+  checks and parsed-input fingerprints detect mismatched datasets.
+- Tests exercise changed ratings/evidence, unknowns, ordering, invalid manifests,
+  strict JSON input, read-only operation and use outside the repository directory.
+- Next: a reproducible synthetic evaluation bundle with manifest and report
+  checks. This remains software preparation, not a validated research release.
+- Research validation still requires a second rater and reviewed weights,
+  component floors, thresholds and rating anchors.

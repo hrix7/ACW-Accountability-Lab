@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "dataset_id": "acw-synthetic-examples",
+  "dataset_version": "1.0.0",
+  "fingerprint_format": "sha256-python-json-sort-keys-compact-utf8-v1",
+  "dataset_sha256": "4d2a0f6fecef0ad398944f08001c3092e90a0836ba8bc8edc964201c80e70a98",
+  "case_ids": [
+    "synthetic-limited-control",
+    "synthetic-reviewed-defence",
+    "synthetic-incomplete-evidence"
+  ],
+  "synthetic": true
+}

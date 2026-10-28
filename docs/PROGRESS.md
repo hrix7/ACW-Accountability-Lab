@@ -1,5 +1,24 @@
 # Progress log
 
+## 2026-10-27 — Versioned synthetic dataset verification
+
+- Verified the standalone GitHub repository and README, then read the current
+  roadmap, progress log and input gates. No applicable AGENTS.md was found.
+  Started from published commit 96d72f1 with a clean working tree.
+- Added `data/synthetic_manifest.json` version 1.0.0 for the three unchanged
+  synthetic cases, plus `dataset_manifest.py` for read-only verification.
+- Verification checks strict manifest structure/version, explicit synthetic
+  status, ordered IDs and the existing parsed-input SHA-256 convention.
+  README documents version updates and the trusted-manifest limitation.
+- Checks: 83 tests pass, including eight new manifest tests and existing report,
+  editing and viewer regressions. Default manifest verification and whitespace
+  checks pass. Publication and remote SHA verification are reported in the run result.
+- Synthetic labels, unknowns, ratings and unvalidated thresholds are unchanged.
+  No real-case scores, manuscripts, private co-author material or conference files
+  were added; Conference-Publications was untouched.
+- Next: reproducible synthetic evaluation bundle. Independent research validation
+  remains pending a second rater and reviewed scoring decisions.
+
 ## 2026-10-26 — Report reproducibility metadata
 
 - Verified GitHub repository and README and read current roadmap, progress and
