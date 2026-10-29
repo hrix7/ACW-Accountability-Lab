@@ -125,6 +125,29 @@ manifest; changing both data and manifest can produce a match. It does not
 verify source truth, scoring validity, or the correctness of a version label.
 This initial manifest covers the three existing synthetic examples only.
 
+## Creating a synthetic evaluation bundle
+
+```bash
+python evaluation_bundle.py --output evaluation.zip
+python evaluation_bundle.py --config data/example_config.json --output configured-evaluation.zip
+```
+
+Each ZIP contains the verified synthetic dataset and manifest, supplied
+configuration, assessment/comparison JSON and HTML, the required Python source
+snapshot, reproduction instructions and a SHA-256 file inventory (`BUNDLE.json`).
+The command checks report provenance and shared results before export. Existing
+files and symlinks cannot be replaced; the output parent directory must exist.
+Use `--input` and `--manifest` to select another verified synthetic dataset with
+at least two cases. Invalid data or configuration produces no bundle.
+
+Extract the ZIP and follow its README to rerun the included source into a new
+`rerun/` directory. JSON objects and HTML bytes should match the included reports.
+ZIP metadata is fixed for reproducible output from identical ordered inputs and
+source files; the ZIP timestamp is a format constant, not an assessment date.
+Checksums cover exact bytes of every included file except the inventory itself.
+They do not authenticate a bundle whose files and inventory were both changed.
+This is a synthetic software demonstration; research validation remains pending.
+
 ## Working now
 
 - Six-dimensional risk profiles, stored separately from human-control scores.
@@ -134,7 +157,7 @@ This initial manifest covers the three existing synthetic examples only.
 - Separate component-floor checks so an average cannot hide a failed control requirement.
 - Weight sensitivity analysis and JSON/HTML report exports.
 - Side-by-side accessible JSON/HTML case comparison.
-- Strict dataset import, guarded editing and a read-only local viewer, 83 automated tests, and a GitHub
+- Strict dataset import, guarded editing and a read-only local viewer, 89 automated tests, and a GitHub
   Actions workflow.
 
 ## Full project scope

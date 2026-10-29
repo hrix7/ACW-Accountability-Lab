@@ -1,5 +1,25 @@
 # Progress log
 
+## 2026-10-28 — Reproducible synthetic evaluation bundle
+
+- Verified the standalone GitHub repository/README and read current README,
+  roadmap and progress. No applicable AGENTS.md was found; started from clean
+  published commit 3b38eac. Conference-Publications was untouched.
+- Added evaluation_bundle.py: validate a synthetic dataset against its manifest,
+  build both report formats, check shared results/provenance, and export a new ZIP
+  containing inputs, required source files, reproduction instructions and hashes.
+- ZIP timestamps are fixed format metadata, not invented progress dates. Export
+  preserves existing paths and validates/renders before opening the destination.
+- Verification: 89 tests pass, including six bundle tests. Extracted source
+  reproduces default/configured JSON objects and HTML bytes. Checks cover file
+  inventories, repeatable ZIP bytes, disagreement, malformed inputs and protected
+  destinations. git diff --check passes.
+- Preserved synthetic labels, explicit unknowns and unvalidated scoring settings.
+  No real-case scores, private material or manuscripts were added.
+- Prepared for GitHub publication; remote verification is reported in the run
+  result. Next: read-only bundle integrity verification. Research validation
+  remains pending a second rater and reviewed scoring decisions.
+
 ## 2026-10-27 — Versioned synthetic dataset verification
 
 - Verified the standalone GitHub repository and README, then read the current

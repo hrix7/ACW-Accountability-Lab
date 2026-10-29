@@ -99,3 +99,14 @@ Do not use conference publication metadata as the project backlog. Scheduled wor
   checks. This remains software preparation, not a validated research release.
 - Research validation still requires a second rater and reviewed weights,
   component floors, thresholds and rating anchors.
+
+## 2026-10-28 checkpoint
+
+- Added reproducible synthetic evaluation ZIP export with verified inputs,
+  configuration, JSON/HTML reports, required source snapshot and file checksums.
+- Export checks assessment/comparison agreement before creating a new file;
+  existing files and symlink targets are protected. Extracted source reproduces
+  default and configured reports in integration tests.
+- Next: read-only bundle verification for missing, changed and unexpected files.
+- This is software preparation. A second rater and reviewed weights, floors,
+  thresholds and anchors are still required for independent research validation.
