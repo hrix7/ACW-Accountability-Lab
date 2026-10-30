@@ -4,7 +4,7 @@ import math
 from pathlib import Path
 
 
-def load_json(path):
+def loads_json(content):
     """Reject repeated keys and all non-finite numeric representations."""
     def unique_object(pairs):
         result = {}
@@ -23,7 +23,11 @@ def load_json(path):
             raise ValueError(f'Non-finite JSON number: {value}')
         return result
 
-    return json.loads(Path(path).read_text(encoding='utf-8'),
+    return json.loads(content,
                       object_pairs_hook=unique_object,
                       parse_constant=reject_constant,
                       parse_float=finite_float)
+
+
+def load_json(path):
+    return loads_json(Path(path).read_text(encoding='utf-8'))

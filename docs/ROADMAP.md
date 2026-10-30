@@ -110,3 +110,14 @@ Do not use conference publication metadata as the project backlog. Scheduled wor
 - Next: read-only bundle verification for missing, changed and unexpected files.
 - This is software preparation. A second rater and reviewed weights, floors,
   thresholds and anchors are still required for independent research validation.
+
+## 2026-10-29 checkpoint
+
+- Added read-only ZIP verification for schema-v1 inventory, all file checksums,
+  synthetic dataset manifest and dataset identity. No extraction or execution.
+- Rejects missing/unexpected/duplicate entries, non-regular files, unsupported
+  archive features, malformed inventories and size-limit violations.
+- Next: add bundle export/verification to continuous integration and document a
+  compact end-to-end reproducibility workflow.
+- Independent research validation remains pending a second rater and reviewed
+  weights, floors, thresholds and rating anchors.

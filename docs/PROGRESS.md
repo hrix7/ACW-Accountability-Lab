@@ -1,5 +1,24 @@
 # Progress log
 
+## 2026-10-29 — Read-only bundle verification
+
+- Verified the standalone GitHub repository and project README; read current
+  README, roadmap and progress. No applicable AGENTS.md was found. Started from
+  clean published commit e6c3ac6; Conference-Publications was untouched.
+- Added verify_bundle.py to check the fixed schema-v1 inventory, exact-byte
+  hashes, synthetic dataset manifest and dataset identity without extraction or
+  executing bundled code. Shared strict JSON parsing now accepts in-memory text.
+- Added size limits and rejection of duplicate/unexpected members, symlinks,
+  encrypted entries and unsupported compression. Documented consistency versus
+  authenticity and report-reproduction limitations.
+- Verification: 97 tests pass, including eight verifier tests and the existing
+  extracted-source report reproduction tests; git diff --check passes.
+- Synthetic labels, unknowns and unvalidated scoring settings are preserved.
+  No real-case scores, manuscripts or private co-author materials were added.
+- Prepared for GitHub publication; remote commit verification is reported in the
+  run result. Next: continuous-integration bundle checks and reproducibility guide.
+  Research validation still needs a second rater and reviewed scoring decisions.
+
 ## 2026-10-28 — Reproducible synthetic evaluation bundle
 
 - Verified the standalone GitHub repository/README and read current README,

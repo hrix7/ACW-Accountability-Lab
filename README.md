@@ -148,6 +148,24 @@ Checksums cover exact bytes of every included file except the inventory itself.
 They do not authenticate a bundle whose files and inventory were both changed.
 This is a synthetic software demonstration; research validation remains pending.
 
+## Verifying an evaluation bundle
+
+```bash
+python verify_bundle.py evaluation.zip
+```
+
+This read-only command checks the schema-v1 file inventory, every listed SHA-256
+checksum, and the synthetic dataset against its manifest and inventory identity.
+It rejects missing, unexpected or duplicate members, symlinks, encrypted entries,
+unsupported compression and oversized files (8 MiB per file, 32 MiB total).
+It never extracts files or executes bundled source. Success exits 0; invalid
+bundles exit 2. The shared strict JSON parser rejects ambiguous inventory keys.
+
+A match establishes internal consistency only. It does not authenticate the
+archive or recalculate reports: changing a file and its checksum together can
+pass. Use the documented reproduction workflow with a trusted source snapshot
+for report reproduction. Synthetic labels and unvalidated thresholds still apply.
+
 ## Working now
 
 - Six-dimensional risk profiles, stored separately from human-control scores.
@@ -157,7 +175,7 @@ This is a synthetic software demonstration; research validation remains pending.
 - Separate component-floor checks so an average cannot hide a failed control requirement.
 - Weight sensitivity analysis and JSON/HTML report exports.
 - Side-by-side accessible JSON/HTML case comparison.
-- Strict dataset import, guarded editing and a read-only local viewer, 89 automated tests, and a GitHub
+- Strict dataset import, guarded editing and a read-only local viewer, 97 automated tests, and a GitHub
   Actions workflow.
 
 ## Full project scope
