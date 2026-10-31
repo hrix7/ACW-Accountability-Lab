@@ -121,3 +121,13 @@ Do not use conference publication metadata as the project backlog. Scheduled wor
   compact end-to-end reproducibility workflow.
 - Independent research validation remains pending a second rater and reviewed
   weights, floors, thresholds and rating anchors.
+
+## 2026-10-30 checkpoint
+
+- Extended the existing CI workflow with explicit synthetic dataset verification
+  and default/configured bundle export-to-verifier CLI checks after the tests.
+- Added an end-to-end reproducibility walkthrough with expected behavior,
+  failure interpretation and the limits of consistency versus research validation.
+- Next: review report accessibility and improve navigation for evidence inspection.
+- Independent research validation remains pending a second rater and reviewed
+  weights, floors, thresholds and rating anchors.

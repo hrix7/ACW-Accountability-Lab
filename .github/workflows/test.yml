@@ -10,5 +10,18 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - run: python -m unittest discover -s tests -v
-      - run: python project.py
+      - name: Run software and reproduction tests
+        run: python -m unittest discover -s tests -v
+      - name: Generate assessment report
+        run: python project.py
+      - name: Verify synthetic dataset
+        run: python dataset_manifest.py
+      - name: Export and verify default evaluation bundle
+        run: |
+          mkdir -p reports/ci
+          python evaluation_bundle.py --output reports/ci/default-evaluation.zip
+          python verify_bundle.py reports/ci/default-evaluation.zip
+      - name: Export and verify configured evaluation bundle
+        run: |
+          python evaluation_bundle.py --config data/example_config.json --output reports/ci/configured-evaluation.zip
+          python verify_bundle.py reports/ci/configured-evaluation.zip

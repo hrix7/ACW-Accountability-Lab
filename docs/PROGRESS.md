@@ -1,5 +1,24 @@
 # Progress log
 
+## 2026-10-30 — CI bundle checks and reproducibility walkthrough
+
+- Verified the standalone GitHub repository and project README and read current
+  README, roadmap, progress and workflow. No applicable AGENTS.md was found.
+  Started from clean published commit 50152aa; Conference-Publications was untouched.
+- Extended the existing read-only GitHub Actions workflow with named steps for
+  synthetic dataset verification and default/configured bundle export/verification.
+- Added docs/REPRODUCIBILITY.md with matching local commands, extracted-source
+  reproduction instructions, failure interpretation and research limitations.
+- Local verification: all 97 tests pass; assessment generation, dataset checks
+  and both bundle export/verification workflows pass; git diff --check passes.
+  No new tests were added for this workflow/documentation change. Remote CI
+  status is separate from local results and is not presumed here.
+- Synthetic labels, unknowns and unvalidated scoring settings are preserved.
+  No generated ZIPs, private material or real-case scores are included in the commit.
+- Prepared for GitHub publication; remote commit verification is reported in the
+  run result. Next: report accessibility/navigation review. Independent validation
+  still requires a second rater and reviewed scoring decisions.
+
 ## 2026-10-29 — Read-only bundle verification
 
 - Verified the standalone GitHub repository and project README; read current

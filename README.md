@@ -166,6 +166,11 @@ archive or recalculate reports: changing a file and its checksum together can
 pass. Use the documented reproduction workflow with a trusted source snapshot
 for report reproduction. Synthetic labels and unvalidated thresholds still apply.
 
+The GitHub Actions workflow runs dataset verification and exports/verifies both
+default and configured evaluation bundles after the test suite. See the
+[reproducibility walkthrough](docs/REPRODUCIBILITY.md) to run the same checks locally
+and understand what each check establishes.
+
 ## Working now
 
 - Six-dimensional risk profiles, stored separately from human-control scores.
