@@ -1,5 +1,25 @@
 # Progress log
 
+## 2026-11-01 — Assessment navigation and table semantics
+
+- Verified the GitHub repository and README, read README/roadmap/progress and
+  checked for applicable AGENTS.md instructions; none were found. Started from
+  clean published commit ca934a1. Conference-Publications was untouched.
+- Added case navigation with safe positional anchors, case IDs in labels,
+  case-specific evidence summaries, a main landmark, visible focus styling,
+  table captions and scoped row/column headers to assessment HTML.
+- Consulted W3C WAI table guidance; sources and review limits are recorded in
+  docs/ACCESSIBILITY.md. No full accessibility conformance is claimed.
+- Verification: all 100 tests pass, including three new structural regression
+  tests and existing extracted-bundle report reproduction checks. Dataset
+  verification, assessment generation and git diff --check pass.
+- Synthetic labels, unknowns, evidence records and unvalidated scoring settings
+  remain intact. No private materials or real-case scores were added.
+- Prepared for GitHub publication; remote commit verification is reported in the
+  run result. Next: comparison/viewer navigation review and manual accessibility
+  checks. Research validation remains pending a second rater and reviewed
+  scoring decisions.
+
 ## 2026-10-30 — CI bundle checks and reproducibility walkthrough
 
 - Verified the standalone GitHub repository and project README and read current

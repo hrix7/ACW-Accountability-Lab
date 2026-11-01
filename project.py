@@ -103,16 +103,43 @@ def evaluate(case, threshold=None, weighting=None, floors=None):
 def render_report(report):
     esc = lambda value: html.escape(str(value), quote=True)
     sections = []
-    for result in report['results']:
-        rows = ''.join(f'<tr><td>{esc(key)}</td><td>{esc(value if value is not None else "Unknown")}</td></tr>'
+    links = []
+    for index, result in enumerate(report['results'], 1):
+        # Positional anchors remain safe and unique even with duplicate titles.
+        anchor = f'case-{index}'
+        title = esc(result["title"])
+        label = f'{title} ({esc(result["id"])})'
+        links.append(f'<li><a href="#{anchor}">{label}</a></li>')
+        rows = ''.join(f'<tr><th scope="row">{esc(key)}</th>'
+                       f'<td>{esc(value if value is not None else "Unknown")}</td></tr>'
                        for key, value in result['risk_profile'].items())
-        sections.append(f'<section><h2>{esc(result["title"])}</h2>'
+        sections.append(f'<section aria-labelledby="{anchor}"><h2 id="{anchor}" tabindex="-1">{label}</h2>'
             f'<p>{"Synthetic example" if result["synthetic"] else "Evidence supplied; not independently verified"}</p>'
             f'<p>Control score: {esc(result.get("control_score", "Insufficient evidence"))}</p>'
             f'<p>Component checks: {esc(result["component_floors"])}</p>'
-            f'<table><tr><th>Risk dimension (0–3)</th><th>Rating</th></tr>{rows}</table>'
-            f'<details><summary>Evidence and calculation details</summary><pre>{esc(json.dumps(result, indent=2))}</pre></details></section>')
-    return '<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ACW Accountability Lab report</title><style>body{font:16px system-ui;background:#131018;color:#f4e9e7;max-width:1000px;margin:40px auto;padding:0 20px}section{border:1px solid #795260;border-radius:12px;padding:24px;margin:20px 0}h1,h2{color:#efb7ca}td,th{text-align:left;padding:8px 20px 8px 0}pre{white-space:pre-wrap;overflow-wrap:anywhere}summary{cursor:pointer;margin-top:20px}</style><h1>ACW Accountability Lab</h1><p>Exploratory research profiles. Ratings and thresholds are unvalidated; risk dimensions are not combined into a probability or compliance verdict.</p>'+render_provenance(report.get('provenance'))+''.join(sections)+'</html>'
+            f'<table><caption>Risk profile — {label}</caption><thead><tr>'
+            f'<th scope="col">Risk dimension (0–3)</th><th scope="col">Rating</th>'
+            f'</tr></thead><tbody>{rows}</tbody></table>'
+            f'<details><summary>Evidence and calculation details — {label}</summary>'
+            f'<pre>{esc(json.dumps(result, indent=2))}</pre></details>'
+            f'<p><a href="#case-navigation">Back to case navigation</a></p></section>')
+    return (
+        '<!doctype html><html lang="en"><head><meta charset="utf-8">'
+        '<meta name="viewport" content="width=device-width,initial-scale=1">'
+        '<title>ACW Accountability Lab report</title><style>'
+        'body{font:16px system-ui;background:#131018;color:#f4e9e7;max-width:1000px;margin:40px auto;padding:0 20px}'
+        'section{border:1px solid #795260;border-radius:12px;padding:24px;margin:20px 0}'
+        'h1,h2,a{color:#efb7ca}td,th{text-align:left;padding:8px 20px 8px 0}'
+        'caption{text-align:left;font-weight:bold}pre{white-space:pre-wrap;overflow-wrap:anywhere}'
+        'summary{cursor:pointer;margin-top:20px}a,summary,h2{overflow-wrap:anywhere}'
+        ':focus-visible{outline:3px solid #efb7ca;outline-offset:4px}'
+        '</style></head><body><h1>ACW Accountability Lab</h1>'
+        '<p>Exploratory research profiles. Ratings and thresholds are unvalidated; '
+        'risk dimensions are not combined into a probability or compliance verdict.</p>'
+        '<nav aria-label="Cases"><h2 id="case-navigation" tabindex="-1">Case navigation</h2><ul>'
+        + ''.join(links) + '</ul></nav><main>'
+        + render_provenance(report.get('provenance')) + ''.join(sections)
+        + '</main></body></html>')
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)

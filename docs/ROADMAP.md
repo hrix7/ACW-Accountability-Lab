@@ -131,3 +131,14 @@ Do not use conference publication metadata as the project backlog. Scheduled wor
 - Next: review report accessibility and improve navigation for evidence inspection.
 - Independent research validation remains pending a second rater and reviewed
   weights, floors, thresholds and rating anchors.
+
+## 2026-11-01 checkpoint
+
+- Improved assessment HTML with case navigation, unique heading targets,
+  case-labeled evidence disclosures, table captions and explicit header scopes.
+- Structural tests cover navigation targets, duplicate/untrusted titles, unknowns,
+  complete evidence records and preservation of report inputs.
+- Next: extend navigation and table review to comparison HTML and the local viewer.
+  Manual keyboard, zoom and screen-reader evaluation remains pending.
+- Independent research validation still requires a second rater and reviewed
+  weights, component floors, thresholds and rating anchors.

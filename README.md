@@ -14,7 +14,11 @@ python project.py
 python -m unittest discover -s tests -v
 ```
 
-Open `reports/assessment.html` in a browser. The same results, inputs and evidence are in `reports/assessment.json`.
+Open `reports/assessment.html` in a browser. Use the case navigation to jump to a
+profile, then expand its case-labeled evidence and calculation details. Risk
+tables have case captions and explicit row/column headers. The same results,
+inputs and evidence are in `reports/assessment.json`. See the
+[accessibility review notes](docs/ACCESSIBILITY.md) for checks and limitations.
 
 To explore an explicitly chosen threshold and component floors:
 
@@ -180,7 +184,7 @@ and understand what each check establishes.
 - Separate component-floor checks so an average cannot hide a failed control requirement.
 - Weight sensitivity analysis and JSON/HTML report exports.
 - Side-by-side accessible JSON/HTML case comparison.
-- Strict dataset import, guarded editing and a read-only local viewer, 97 automated tests, and a GitHub
+- Strict dataset import, guarded editing and a read-only local viewer, 100 automated tests, and a GitHub
   Actions workflow.
 
 ## Full project scope
