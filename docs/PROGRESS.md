@@ -1,5 +1,25 @@
 # Progress log
 
+## 2026-11-01 — Comparison and viewer navigation follow-up
+
+- Verified GitHub repository/README, read current README/roadmap/progress and
+  checked applicable instruction paths; no AGENTS.md was found. Started from
+  clean published commit 0a5ec96; Conference-Publications was untouched.
+- Code inspection found the Comparison link targeted an empty element before
+  evidence rather than the tables. Fixed content order and navigation targets,
+  added a main landmark, comparison table captions/navigation, and case IDs in
+  column headers and evidence summaries.
+- All 103 tests pass, including three new structural regression tests, existing
+  live read-only server checks and extracted-bundle reproduction tests.
+  Default/configured comparison generation, viewer check with draft, dataset
+  verification and git diff --check pass.
+- Synthetic labels, unknowns, complete evidence and draft audit records, and
+  unvalidated scoring settings remain intact. No private material or real-case
+  scores were published. Manual accessibility evaluation remains pending.
+- Prepared for GitHub publication; remote verification is reported in the run
+  result. Next: structured per-case evidence inspection. Independent validation
+  needs a second rater and reviewed scoring decisions.
+
 ## 2026-11-01 — Assessment navigation and table semantics
 
 - Verified the GitHub repository and README, read README/roadmap/progress and

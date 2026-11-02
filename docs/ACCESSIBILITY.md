@@ -32,6 +32,27 @@ table with a screen reader. Check zoom and narrow screens with long titles.
 Record actual browser/assistive-technology versions and observations when this
 is performed; no user testing or assistive-technology results are asserted here.
 
-Comparison HTML and the read-only viewer need a separate navigation/table
-review. These notes do not mark that work complete. Research validation remains
+## Comparison and viewer follow-up: 2026-11-01
+
+Code inspection confirmed that the viewer's Comparison link targeted an empty
+element before evidence, while comparison tables appeared after the draft.
+The viewer now renders comparison tables first, followed by evidence and draft
+sections inside one main landmark. Comparison navigation targets that landmark;
+evidence/draft links target their headings. Table navigation targets each
+comparison heading. Targets are focusable, with visible focus styling.
+
+Comparison tables now have descriptive captions and include case IDs alongside
+titles in column headers; existing row/column scopes are retained. Viewer
+evidence summaries also include IDs. Long evidence text wraps. The table changes
+apply the W3C guidance linked above.
+
+Three additional structural tests verify target resolution and content order,
+caption/header identity with duplicate and untrusted titles, preservation of
+unknowns and complete evidence, and unchanged draft audit JSON. Existing live
+server tests check read-only endpoints and security headers; bundle tests check
+reproducible HTML. These do not establish browser or screen-reader usability.
+The manual checks above remain pending for all three report surfaces.
+
+Next software work: make per-case evidence inspection easier without requiring
+users to read the complete raw JSON disclosure. Research validation remains
 pending independent ratings and reviewed scoring decisions.

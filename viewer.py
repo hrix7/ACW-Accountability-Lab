@@ -46,7 +46,7 @@ def render_dashboard(payload):
             'risk': case['risk'],
         }
         evidence.append(
-            f'<details><summary>{esc(case["title"])} — {esc(label)}</summary>'
+            f'<details><summary>{esc(case["title"])} ({esc(case["id"])}) — {esc(label)}</summary>'
             f'<p><strong>Scope:</strong> {esc(case["scope"])}</p>'
             f'<pre>{esc(json.dumps(evidence_record, indent=2, ensure_ascii=False))}'
             '</pre></details>')
@@ -54,16 +54,18 @@ def render_dashboard(payload):
         draft = '<p>No draft loaded. Start with <code>--draft data/example_draft.json</code> to preview one.</p>'
     else:
         draft = f'<pre>{esc(json.dumps(payload["draft_audit"], indent=2, ensure_ascii=False))}</pre>'
-    additions = (
+    navigation = (
         '<nav aria-label="Viewer sections"><a href="#comparison">Comparison</a> · '
-        '<a href="#evidence">Evidence</a> · <a href="#draft">Draft audit</a></nav>'
-        '<section id="evidence"><h2>Evidence records</h2>' + ''.join(evidence) + '</section>'
-        '<section id="draft"><h2>Draft audit</h2>' + draft + '</section>'
+        '<a href="#evidence">Evidence</a> · <a href="#draft">Draft audit</a></nav>')
+    additions = (
+        '<section aria-labelledby="evidence"><h2 id="evidence" tabindex="-1">Evidence records</h2>' + ''.join(evidence) + '</section>'
+        '<section aria-labelledby="draft"><h2 id="draft" tabindex="-1">Draft audit</h2>' + draft + '</section>'
         '<footer><p>Read-only local viewer; no write endpoint is available.</p></footer>')
     page = render_comparison(payload['comparison'])
     page = page.replace('<h1>ACW case comparison</h1>',
-                        '<h1>ACW Accountability Lab viewer</h1><div id="comparison"></div>' + additions)
-    return page
+                        '<h1>ACW Accountability Lab viewer</h1>' + navigation, 1)
+    # Append inside the existing main landmark, after the comparison tables.
+    return page.replace('</main>', additions + '</main>', 1)
 
 
 def make_handler(payload):

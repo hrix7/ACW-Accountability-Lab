@@ -142,3 +142,14 @@ Do not use conference publication metadata as the project backlog. Scheduled wor
   Manual keyboard, zoom and screen-reader evaluation remains pending.
 - Independent research validation still requires a second rater and reviewed
   weights, component floors, thresholds and rating anchors.
+
+## 2026-11-01 comparison/viewer follow-up
+
+- Fixed the viewer's Comparison navigation target and ordered comparison,
+  evidence and draft content inside one main landmark.
+- Added comparison table navigation, captions and case IDs in headers and
+  evidence summaries, with regression coverage for content and target integrity.
+- Next: structured per-case evidence inspection alongside the raw audit data.
+  Manual keyboard, zoom and screen-reader evaluation remains pending.
+- Research validation requires a second rater and reviewed weights, floors,
+  thresholds and rating anchors; these dependencies remain pending.

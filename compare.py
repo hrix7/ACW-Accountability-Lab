@@ -60,7 +60,7 @@ def build_comparison(cases, config=None):
 def render_comparison(comparison):
     esc = lambda value: html.escape(str(value), quote=True)
     cases = comparison['cases']
-    headings = ''.join(f'<th scope="col">{esc(case["title"])}</th>' for case in cases)
+    headings = ''.join(f'<th scope="col">{esc(case["title"])} ({esc(case["id"])})</th>' for case in cases)
 
     def value(value):
         return 'Unknown' if value is None else esc(value)
@@ -79,21 +79,26 @@ def render_comparison(comparison):
     for row in comparison['risk_dimensions']:
         cells = ''.join(f'<td>{value(item)}</td>' for item in row['values'])
         risk_rows.append(f'<tr><th scope="row">{esc(row["dimension"])}</th>{cells}</tr>')
-    return ('<!doctype html><html lang="en"><meta charset="utf-8">'
+    return ('<!doctype html><html lang="en"><head><meta charset="utf-8">'
             '<meta name="viewport" content="width=device-width,initial-scale=1">'
             '<title>ACW case comparison</title><style>'
             'body{font:16px system-ui;background:#131018;color:#f4e9e7;max-width:1200px;margin:40px auto;padding:0 20px}'
-            'h1,h2{color:#efb7ca}table{border-collapse:collapse;width:100%;margin:18px 0 34px;overflow:auto}'
+            'h1,h2,a{color:#efb7ca}table{border-collapse:collapse;width:100%;margin:18px 0 34px;overflow:auto}'
             'th,td{border:1px solid #795260;padding:10px;text-align:left}th{background:#241923}'
-            '.notice{border-left:4px solid #efb7ca;padding:10px 14px;background:#241923}</style>'
-            '<h1>ACW case comparison</h1><p class="notice">' + esc(comparison['notice']) + '</p>' +
+            'caption{text-align:left;font-weight:bold}pre{white-space:pre-wrap;overflow-wrap:anywhere}'
+            'th,td,summary{overflow-wrap:anywhere}:focus-visible{outline:3px solid #efb7ca;outline-offset:4px}'
+            '.notice{border-left:4px solid #efb7ca;padding:10px 14px;background:#241923}</style></head><body>'
+            '<h1>ACW case comparison</h1>'
+            '<nav aria-label="Comparison tables"><a href="#assessment-summary">Assessment summary</a> · '
+            '<a href="#human-control">Human control</a> · <a href="#risk-profile">Risk profile</a></nav>'
+            '<main id="comparison" tabindex="-1"><p class="notice">' + esc(comparison['notice']) + '</p>' +
             render_provenance(comparison.get('provenance')) +
-            '<h2>Assessment summary</h2><table><thead><tr><th scope="col">Measure</th>' + headings +
+            '<h2 id="assessment-summary" tabindex="-1">Assessment summary</h2><table><caption>Assessment summary by case</caption><thead><tr><th scope="col">Measure</th>' + headings +
             '</tr></thead><tbody>' + ''.join(summary_rows) + '</tbody></table>'
-            '<h2>Human-control dimensions (0–1)</h2><table><thead><tr><th scope="col">Dimension</th>' +
+            '<h2 id="human-control" tabindex="-1">Human-control dimensions (0–1)</h2><table><caption>Human-control ratings by case (0–1)</caption><thead><tr><th scope="col">Dimension</th>' +
             headings + '</tr></thead><tbody>' + ''.join(control_rows) + '</tbody></table>'
-            '<h2>Risk profile (ordinal 0–3; not aggregated)</h2><table><thead><tr><th scope="col">Dimension</th>' +
-            headings + '</tr></thead><tbody>' + ''.join(risk_rows) + '</tbody></table></html>')
+            '<h2 id="risk-profile" tabindex="-1">Risk profile (ordinal 0–3; not aggregated)</h2><table><caption>Ordinal risk ratings by case (0–3; not aggregated)</caption><thead><tr><th scope="col">Dimension</th>' +
+            headings + '</tr></thead><tbody>' + ''.join(risk_rows) + '</tbody></table></main></body></html>')
 
 
 def main():
