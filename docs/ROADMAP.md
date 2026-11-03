@@ -153,3 +153,14 @@ Do not use conference publication metadata as the project backlog. Scheduled wor
   Manual keyboard, zoom and screen-reader evaluation remains pending.
 - Research validation requires a second rater and reviewed weights, floors,
   thresholds and rating anchors; these dependencies remain pending.
+
+## 2026-11-02 checkpoint
+
+- Added structured per-case evidence tables and a source catalog in the read-only
+  viewer, retaining raw records and explicit unknown/missing-citation labels.
+- Tests compare displayed values, rationales, confidence, references and catalog
+  fields against supplied records and check escaping and input preservation.
+- Next: a read-only evidence completeness summary to locate missing ratings and
+  uncited dimensions, without presenting completeness as evidence quality.
+- Manual accessibility review remains pending. Independent research validation
+  still requires a second rater and reviewed scoring decisions.

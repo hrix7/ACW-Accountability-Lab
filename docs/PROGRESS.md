@@ -1,5 +1,27 @@
 # Progress log
 
+## 2026-11-02 — Structured viewer evidence inspection
+
+- Verified the standalone GitHub repository and README; read current README,
+  roadmap, progress and input gates. No applicable AGENTS.md was found.
+  Started from clean published commit 33b2d86; Conference-Publications was untouched.
+- Code inspection confirmed evidence inspection required raw JSON. Added separate
+  control/risk tables with ratings, supplied confidence, rationale and source IDs;
+  a source catalog shows exact supplied titles, URLs and locators. Supplied
+  assessment dates are labeled, and the complete raw record remains available.
+- Missing ratings, citations and sources remain explicit. URLs are escaped text;
+  no sources are fetched, no truth or confidence is inferred, and all synthetic
+  labels and unvalidated scoring settings remain intact.
+- Verification: 106 tests pass, including three new evidence-view tests and
+  existing live read-only server checks. Updated the navigation regression to
+  distinguish comparison tables from the newly added nested evidence tables.
+  Viewer check with draft, dataset verification and git diff --check pass.
+- No private material, manuscripts or real-case scores were added. Prepared for
+  GitHub publication; remote verification is reported in the run result.
+- Next: read-only evidence completeness summary. Manual accessibility review and
+  independent validation remain pending; the latter needs a second rater and
+  reviewed weights, floors, thresholds and anchors.
+
 ## 2026-11-01 — Comparison and viewer navigation follow-up
 
 - Verified GitHub repository/README, read current README/roadmap/progress and

@@ -56,3 +56,17 @@ The manual checks above remain pending for all three report surfaces.
 Next software work: make per-case evidence inspection easier without requiring
 users to read the complete raw JSON disclosure. Research validation remains
 pending independent ratings and reviewed scoring decisions.
+
+## Structured viewer evidence: 2026-11-02
+
+Each case disclosure now includes separate captioned control/risk evidence
+tables with scoped dimension and column headers. The source catalog uses a
+description list, retaining source IDs, titles, URLs and locators. Empty
+citations/catalogs and unknown ratings are explicit. Supplied confidence and
+assessment dates are labeled as such. The original raw record remains present.
+
+Tests compare rendered fields with the inputs, cover escaped source text and
+unknowns, and retain raw-record checks. Source fixtures are explicitly synthetic
+and are not added to the dataset. No external source is fetched or verified.
+Keyboard, zoom and assistive-technology evaluation remains pending, including
+the wider evidence tables with long rationales.

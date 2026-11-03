@@ -141,7 +141,7 @@ class ComparisonNavigationTests(unittest.TestCase):
         main = targets['comparison']
         self.assertEqual(main['tag'], 'main')
         # The old target was an empty div before evidence, with tables at the end.
-        self.assertTrue(all(t['parent'] is main for t in doc.tagged('table')))
+        self.assertTrue(all(t['parent'] is main for t in doc.tagged('table')[:3]))
         sequence = [n['tag'] for n in doc.nodes if n['parent'] is main]
         self.assertLess(max(i for i, tag in enumerate(sequence) if tag == 'table'),
                         sequence.index('section'))

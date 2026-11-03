@@ -35,6 +35,39 @@ def build_payload(cases, config=None, changes=None):
     }
 
 
+
+def render_case_evidence(case):
+    """Render supplied records without fetching sources or inferring evidence."""
+    esc = lambda value: html.escape(str(value), quote=True)
+    tables = []
+    for group, caption in (('control', 'Human-control evidence (ratings 0–1)'),
+                           ('risk', 'Risk evidence (ordinal ratings 0–3; not aggregated)')):
+        rows = []
+        for dimension, rating in case[group].items():
+            refs = ', '.join(esc(ref) for ref in rating['source_ids']) or 'No sources cited'
+            value = 'Unknown' if rating['value'] is None else esc(rating['value'])
+            rows.append(
+                f'<tr><th scope="row">{esc(dimension)}</th><td>{value}</td>'
+                f'<td>{esc(rating["confidence"])}</td><td>{esc(rating["rationale"])}</td>'
+                f'<td>{refs}</td></tr>')
+        tables.append(
+            f'<table><caption>{caption} — {esc(case["title"])} ({esc(case["id"])})</caption>'
+            '<thead><tr><th scope="col">Dimension</th><th scope="col">Rating</th>'
+            '<th scope="col">Confidence (supplied)</th><th scope="col">Rationale</th>'
+            '<th scope="col">Source IDs</th></tr></thead><tbody>'
+            + ''.join(rows) + '</tbody></table>')
+    sources = ''.join(
+        f'<dt>{esc(source["id"])} — {esc(source["title"])}</dt>'
+        f'<dd><p>URL: {esc(source["url"])}</p>'
+        f'<p>Locator: {esc(source["locator"])}</p></dd>'
+        for source in case['sources'])
+    catalog = '<dl>' + sources + '</dl>' if sources else '<p>No sources supplied.</p>'
+    return (
+        f'<p><strong>Assessment date (supplied):</strong> {esc(case["assessed_on"])}</p>'
+        '<p>Sources and confidence labels are supplied, not independently verified. '
+        'Ratings and thresholds remain unvalidated.</p>'
+        + ''.join(tables) + '<h3>Source catalog</h3>' + catalog)
+
 def render_dashboard(payload):
     esc = lambda value: html.escape(str(value), quote=True)
     evidence = []
@@ -48,6 +81,8 @@ def render_dashboard(payload):
         evidence.append(
             f'<details><summary>{esc(case["title"])} ({esc(case["id"])}) — {esc(label)}</summary>'
             f'<p><strong>Scope:</strong> {esc(case["scope"])}</p>'
+            + render_case_evidence(case) +
+            '<h3>Raw evidence record</h3>'
             f'<pre>{esc(json.dumps(evidence_record, indent=2, ensure_ascii=False))}'
             '</pre></details>')
     if payload['draft_audit'] is None:
