@@ -1,5 +1,17 @@
 # Progress log
 
+## 2026-11-03 — Locate missing ratings and citations
+
+- Added an Evidence gaps summary before each case's detailed evidence tables.
+  Explicit null values and empty source-ID lists are counted independently.
+  In the incomplete synthetic example, three of five control ratings and all
+  six risk ratings are unknown. The summary names each affected dimension.
+- Counts describe field presence only. No case data or scoring configuration
+  changed. The existing raw evidence and tables remain available.
+- All 108 tests passed locally, including mixed citation/rating states and the
+  example dataset. The synthetic manifest, viewer draft check and whitespace
+  check passed. Manual accessibility evaluation remains pending.
+
 ## 2026-11-02 — Structured viewer evidence inspection
 
 - Verified the standalone GitHub repository and README; read current README,

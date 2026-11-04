@@ -86,7 +86,9 @@ evidence records and the draft audit in that order, with navigation to each
 section. Table headers and evidence summaries include case IDs to distinguish
 identical titles. Expand a case to inspect separate control/risk evidence tables
 with ratings, supplied confidence, rationales and source IDs, followed by a
-source catalog and the complete raw evidence record. Missing ratings display
+source catalog and the complete raw evidence record. Above the tables, **Evidence gaps**
+lists unknown ratings and uncited dimensions separately for control and risk. A
+dimension may appear in both lists; the counts do not measure evidence quality. Missing ratings display
 as Unknown; missing citations and empty catalogs are explicit. Source URLs are
 displayed as text and are not fetched or verified. It accepts only GET/HEAD requests, exposes
 no write endpoint, adds restrictive browser headers and refuses non-loopback
@@ -191,7 +193,7 @@ and understand what each check establishes.
 - Separate component-floor checks so an average cannot hide a failed control requirement.
 - Weight sensitivity analysis and JSON/HTML report exports.
 - Side-by-side accessible JSON/HTML case comparison.
-- Strict dataset import, guarded editing and a read-only local viewer, 106 automated tests, and a GitHub
+- Strict dataset import, guarded editing and a read-only local viewer, 108 automated tests, and a GitHub
   Actions workflow.
 
 ## Full project scope

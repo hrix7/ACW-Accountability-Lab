@@ -67,3 +67,30 @@ class EvidenceViewTests(unittest.TestCase):
             self.assertEqual(json.loads(raw['text']),
                              {k: case[k] for k in ('sources', 'control', 'risk')})
         self.assertEqual(payload, before)
+
+    def test_gaps_distinguish_unknown_from_uncited(self):
+        # A source in the catalog only counts for ratings that actually cite it.
+        self.case['sources'] = [dict(id='fixture', title='Fixture', locator='example',
+                                     url='https://example.invalid/fixture')]
+        for group in ('control', 'risk'):
+            for item in self.case[group].values():
+                item.update(value=0, source_ids=['fixture'])
+        self.case['control']['audit']['value'] = None
+        self.case['control']['predict']['source_ids'] = []
+        self.case['risk']['propagation'].update(value=None, source_ids=[])
+        doc = Document(render_dashboard(build_payload(self.cases)))
+        lines = [n['text'] for n in doc.tagged('li')]
+        self.assertEqual(lines[:4], [
+            'Unknown rating (1 of 5): audit', 'No cited source (1 of 5): predict',
+            'Unknown rating (1 of 6): propagation', 'No cited source (1 of 6): propagation'])
+
+    def test_synthetic_example_gap_counts_and_empty_list(self):
+        doc = Document(render_case_evidence(self.cases[2]))
+        lines = [n['text'] for n in doc.tagged('li')]
+        self.assertEqual(lines[0], 'Unknown rating (3 of 5): predict, override, audit')
+        self.assertTrue(lines[1].startswith('No cited source (5 of 5):'))
+        self.assertTrue(lines[2].startswith('Unknown rating (6 of 6):'))
+        self.assertTrue(lines[3].startswith('No cited source (6 of 6):'))
+        complete_ratings = Document(render_case_evidence(self.cases[0]))
+        self.assertIn('Unknown rating (0 of 5): None',
+                      [n['text'] for n in complete_ratings.tagged('li')])

@@ -34,6 +34,22 @@ def build_payload(cases, config=None, changes=None):
         'draft_audit': audit,
     }
 
+def render_evidence_gaps(case):
+    """Describe missing fields in validated ratings without assigning a score."""
+    groups = []
+    for key, title in (('control', 'Human control'), ('risk', 'Risk')):
+        ratings = case[key]
+        unknown = [name for name, item in ratings.items() if item['value'] is None]
+        uncited = [name for name, item in ratings.items() if not item['source_ids']]
+        rows = []
+        for label, names in (('Unknown rating', unknown), ('No cited source', uncited)):
+            dimensions = ', '.join(html.escape(name) for name in names) or 'None'
+            rows.append(f'<li>{label} ({len(names)} of {len(ratings)}): {dimensions}</li>')
+        groups.append(f'<h4>{title}</h4><ul>{"".join(rows)}</ul>')
+    return ('<section><h3>Evidence gaps</h3>'
+            '<p>A dimension can appear in both lists. Counts describe the supplied '
+            'record only; they do not measure evidence quality or risk.</p>'
+            + ''.join(groups) + '</section>')
 
 
 def render_case_evidence(case):
@@ -66,7 +82,7 @@ def render_case_evidence(case):
         f'<p><strong>Assessment date (supplied):</strong> {esc(case["assessed_on"])}</p>'
         '<p>Sources and confidence labels are supplied, not independently verified. '
         'Ratings and thresholds remain unvalidated.</p>'
-        + ''.join(tables) + '<h3>Source catalog</h3>' + catalog)
+        + render_evidence_gaps(case) + ''.join(tables) + '<h3>Source catalog</h3>' + catalog)
 
 def render_dashboard(payload):
     esc = lambda value: html.escape(str(value), quote=True)

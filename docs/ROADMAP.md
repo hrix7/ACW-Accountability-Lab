@@ -164,3 +164,11 @@ Do not use conference publication metadata as the project backlog. Scheduled wor
   uncited dimensions, without presenting completeness as evidence quality.
 - Manual accessibility review remains pending. Independent research validation
   still requires a second rater and reviewed scoring decisions.
+
+## 2026-11-03 checkpoint
+
+- The viewer now names unknown ratings and uncited dimensions for each case,
+  with separate counts for human control and ordinal risk.
+- Next: prepare a blank independent-rating worksheet and a reproducible handoff
+  procedure using the versioned synthetic cases. Actual independent review is
+  pending a second rater and reviewed weights, floors, thresholds and anchors.
