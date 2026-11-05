@@ -184,6 +184,14 @@ default and configured evaluation bundles after the test suite. See the
 [reproducibility walkthrough](docs/REPRODUCIBILITY.md) to run the same checks locally
 and understand what each check establishes.
 
+## Preparing a synthetic rating exercise
+
+Use the [blank worksheet](docs/RATING_WORKSHEET.md) and
+[handoff procedure](docs/REVIEW_HANDOFF.md) to pin materials and record actual
+reviewer responses separately. These are preparation only: no second-rater
+responses exist in the template, and the supplied examples are unblinded.
+Research validation and reviewed scoring decisions remain pending.
+
 ## Working now
 
 - Six-dimensional risk profiles, stored separately from human-control scores.

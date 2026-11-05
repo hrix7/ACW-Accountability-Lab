@@ -1,5 +1,24 @@
 # Progress log
 
+## 2026-11-04 — Blank rating worksheet and handoff
+
+- Verified standalone GitHub repository/README and clean published commit
+  1441e44. Read README, roadmap, progress, rating guide and methodology.
+  No applicable AGENTS.md was found; Conference-Publications was untouched.
+- Added a Markdown worksheet with eleven blank rating rows, identity/exposure
+  fields, source inventory and closeout fields; no reviewer answers or dates.
+  Documented commit/manifest verification and preservation of separate responses.
+- The handoff explicitly labels existing rated examples as unblinded practice,
+  distinguishes unanswered from assessed unknown, and retains unvalidated
+  thresholds and synthetic labels. Completed reviewer material is not included.
+- Verification: 108 existing tests pass; dataset verification and whitespace
+  checks pass. Checked all eleven rows are blank, manifest identity matches,
+  and local links resolve. No new tests for this documentation-only update.
+- Prepared for GitHub publication; remote verification is reported in the run
+  result. Next: response format and validator. Independent research review is
+  pending a second rater, reviewed scoring decisions and agreed evidence protocol.
+
+
 ## 2026-11-03 — Locate missing ratings and citations
 
 - Added an Evidence gaps summary before each case's detailed evidence tables.

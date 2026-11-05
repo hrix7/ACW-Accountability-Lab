@@ -172,3 +172,14 @@ Do not use conference publication metadata as the project backlog. Scheduled wor
 - Next: prepare a blank independent-rating worksheet and a reproducible handoff
   procedure using the versioned synthetic cases. Actual independent review is
   pending a second rater and reviewed weights, floors, thresholds and anchors.
+
+## 2026-11-04 checkpoint
+
+- Added a blank eleven-dimension rating worksheet and reproducible synthetic
+  handoff procedure with commit/manifest identity and explicit exposure records.
+- Unanswered fields are distinct from deliberate unknowns; supplied examples
+  are explicitly unblinded. No responses or agreement results are claimed.
+- Next: define a machine-readable response format and strict validation for
+  unanswered versus assessed-unknown states.
+- Research review remains pending a second rater, reviewed scoring decisions,
+  and an agreed scenario/evidence packet and protocol.
