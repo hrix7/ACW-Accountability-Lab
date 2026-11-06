@@ -63,7 +63,8 @@ dimensions are present and distinguish unanswered cells from deliberate unknowns
 Check value ranges, supplied confidence labels, source IDs/locators and reasons
 for unknowns. Do not substitute zero for missing evidence.
 
-No importer or response validator is provided by these documents. The worksheet
+A separate [JSON response validator](RESPONSE_FORMAT.md) now checks explicit
+response states; it does not import or score responses. The worksheet
 is Markdown and cannot be passed to `project.py` or `case_io.py`. Do not overwrite
 the versioned synthetic dataset with responses. Keep completed worksheets
 outside the public checkout; publication of reviewer material requires explicit
@@ -78,5 +79,5 @@ is supported by this template. Software tests establish software behavior only.
 
 Pending: willing second rater, reviewed anchors/weights/floors/thresholds, and
 an agreed evidence packet/protocol for any independent research exercise.
-Next software step: define a machine-readable response format and strict
-validation that preserves unanswered versus assessed-unknown states.
+Next software step: bind response identifiers to the verified synthetic packet
+and check source linkage. The current validator checks structure only.

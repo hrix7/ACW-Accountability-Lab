@@ -190,7 +190,9 @@ Use the [blank worksheet](docs/RATING_WORKSHEET.md) and
 [handoff procedure](docs/REVIEW_HANDOFF.md) to pin materials and record actual
 reviewer responses separately. These are preparation only: no second-rater
 responses exist in the template, and the supplied examples are unblinded.
-Research validation and reviewed scoring decisions remain pending.
+Research validation and reviewed scoring decisions remain pending. A read-only
+[JSON response validator](docs/RESPONSE_FORMAT.md) distinguishes unanswered,
+assessed-unknown and numeric ratings without importing or scoring responses.
 
 ## Working now
 
@@ -201,7 +203,7 @@ Research validation and reviewed scoring decisions remain pending.
 - Separate component-floor checks so an average cannot hide a failed control requirement.
 - Weight sensitivity analysis and JSON/HTML report exports.
 - Side-by-side accessible JSON/HTML case comparison.
-- Strict dataset import, guarded editing and a read-only local viewer, 108 automated tests, and a GitHub
+- Strict dataset import, guarded editing and a read-only local viewer, 114 automated tests, and a GitHub
   Actions workflow.
 
 ## Full project scope

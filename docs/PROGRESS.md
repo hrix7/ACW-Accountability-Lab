@@ -1,5 +1,22 @@
 # Progress log
 
+## 2026-11-05 — Explicit response states and structural validation
+
+- Verified repository/README and clean published commit f5ad1ee; read current
+  project documents and checked applicable instruction paths (no AGENTS.md).
+  Conference-Publications was untouched.
+- Added rating_response.py and format documentation. Exact fields, eleven
+  dimensions, state/value consistency, supplied explanations/confidence,
+  metadata syntax, strict JSON and numeric bounds are checked read-only.
+- All 114 tests pass, including six new tests for mixed states, zero, malformed
+  values/metadata, required explanations, strict CLI input and no writes.
+- No reviewer responses, real-case scores or private materials are included.
+  Synthetic labels, unknowns and unvalidated thresholds remain unchanged.
+- Prepared for GitHub publication; remote verification is reported in the run
+  result. Next: packet identity and source linkage checks. Actual independent
+  review remains pending a second rater and reviewed scoring/protocol choices.
+
+
 ## 2026-11-04 — Blank rating worksheet and handoff
 
 - Verified standalone GitHub repository/README and clean published commit

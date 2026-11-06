@@ -183,3 +183,12 @@ Do not use conference publication metadata as the project backlog. Scheduled wor
   unanswered versus assessed-unknown states.
 - Research review remains pending a second rater, reviewed scoring decisions,
   and an agreed scenario/evidence packet and protocol.
+
+## 2026-11-05 checkpoint
+
+- Added a strict read-only JSON response validator separating unanswered,
+  assessed-unknown and numeric ratings for synthetic practice records.
+- It checks structure and metadata syntax, not reviewer identity, source truth,
+  packet identity or research validity; no responses are supplied.
+- Next: bind responses to a verified synthetic packet and check source linkage.
+  Actual review still needs a second rater and agreed scoring/protocol decisions.
