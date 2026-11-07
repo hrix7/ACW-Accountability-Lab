@@ -49,12 +49,32 @@ and unsupported fields are rejected.
 
 ## Limits
 
-The validator checks identifier syntax only: it does not resolve a commit,
-verify a dataset hash/case ID against the pinned packet, authenticate reviewer
-identity or date, verify independence, or check consent. A structurally valid
+Without dataset options, the validator checks identifier syntax only. With the
+options below it also checks dataset identity and scope. It does not resolve a
+commit, authenticate reviewer identity or date, verify independence, or check consent. A structurally valid
 record can still be fabricated or scientifically invalid. No real responses
 are shipped with this feature; test records are fabricated software fixtures.
 All rating anchors, weights, floors and thresholds remain unvalidated.
-Source linkage and packet-identity verification are future work. Actual
+Structured source linkage and repository-commit verification remain future work. Actual
 independent review needs a willing second rater and agreed scoring/protocol
 decisions.
+
+
+## Optional dataset identity check
+
+```bash
+python rating_response.py /path/outside/checkout/response.json --dataset data/case_records.json --manifest data/synthetic_manifest.json
+```
+
+Both options are required together; no dataset is selected implicitly. The
+command first validates the response, verifies the selected synthetic dataset
+against its manifest, and then requires an equal parsed-input fingerprint, a
+matching case ID and an exactly equal scope string. Even whitespace changes to
+scope fail. Review mismatches rather than editing identifiers to silence them.
+
+The dataset and manifest must come from the intended trusted handoff. Matching
+files do not authenticate each other, and the response's repository_commit is
+still syntax-checked only. This mode does not compare reviewer ratings with
+example ratings, convert unanswered rows, or validate free-text evidence notes.
+It writes no files and keeps the same exit codes. Without these options, output
+explicitly states that dataset identity was not checked.

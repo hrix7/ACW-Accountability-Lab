@@ -1,5 +1,23 @@
 # Progress log
 
+## 2026-11-06 — Response dataset identity checks
+
+- Verified repository/README and clean published commit 926f59b; read current
+  README, roadmap, progress and applicable instruction paths (no AGENTS.md).
+  Conference-Publications was untouched.
+- Added paired --dataset/--manifest options. Verified datasets must match the
+  response fingerprint, case ID and exact scope. Structural-only mode explicitly
+  reports that dataset identity was not checked.
+- All 118 tests pass, including four new tests for mismatch rejection, manifest
+  integrity, input preservation and CLI paired-option/read-only behavior.
+  Dataset verification and whitespace checks pass.
+- No responses, private materials or real-case scores were added. Synthetic
+  labels, unanswered/unknown states and unvalidated thresholds are preserved.
+- Prepared for GitHub publication; verification is reported in the run result.
+  Next: structured source linkage. Actual research review still needs a second
+  rater and reviewed scoring/protocol decisions.
+
+
 ## 2026-11-05 — Explicit response states and structural validation
 
 - Verified repository/README and clean published commit f5ad1ee; read current

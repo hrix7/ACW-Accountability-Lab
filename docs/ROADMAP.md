@@ -192,3 +192,12 @@ Do not use conference publication metadata as the project backlog. Scheduled wor
   packet identity or research validity; no responses are supplied.
 - Next: bind responses to a verified synthetic packet and check source linkage.
   Actual review still needs a second rater and agreed scoring/protocol decisions.
+
+## 2026-11-06 checkpoint
+
+- Added optional read-only response matching against an explicitly supplied,
+  manifest-verified synthetic dataset: fingerprint, case ID and exact scope.
+- Next: structured source references in responses, with validation against the
+  selected case's source catalog. Free-text notes are not parsed as citations.
+- Repository commit provenance, independent review and scoring validation
+  remain pending; research needs a second rater and agreed scoring/protocol choices.

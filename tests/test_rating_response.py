@@ -95,3 +95,54 @@ class ResponseTests(unittest.TestCase):
                 self.assertEqual(result.returncode, status, result.stderr)
                 self.assertEqual(path.read_text(), content)
                 self.assertEqual(list(Path(folder).iterdir()), [path])
+
+
+class ResponseDatasetTests(unittest.TestCase):
+    def setUp(self):
+        self.cases = json.loads((ROOT/'data/case_records.json').read_text())
+        self.manifest = json.loads((ROOT/'data/synthetic_manifest.json').read_text())
+        self.record = blank()
+        self.record.update(case_id=self.cases[0]['id'], scope=self.cases[0]['scope'],
+                           dataset_sha256=self.manifest['dataset_sha256'])
+
+    def check(self):
+        from rating_response import validate_response_dataset
+        return validate_response_dataset(self.record, self.cases, self.manifest)
+
+    def test_match_preserves_all_inputs_and_unanswered(self):
+        before = copy.deepcopy((self.record, self.cases, self.manifest))
+        self.assertEqual(self.check(), dict(unanswered=11, unknown=0, rated=0))
+        self.assertEqual((self.record, self.cases, self.manifest), before)
+
+    def test_response_identity_mismatches_rejected(self):
+        for key, bad in [('case_id', 'absent'), ('scope', self.record['scope']+' '),
+                         ('dataset_sha256', '0'*64)]:
+            original = self.record[key]
+            self.record[key] = bad
+            with self.subTest(key=key), self.assertRaises(ValueError):
+                self.check()
+            self.record[key] = original
+
+    def test_dataset_must_match_manifest(self):
+        self.cases[0]['scope'] += ' changed'
+        self.record['scope'] = self.cases[0]['scope']
+        with self.assertRaisesRegex(ValueError, 'fingerprint'):
+            self.check()
+
+    def test_cli_pair_success_failure_and_no_writes(self):
+        with tempfile.TemporaryDirectory() as folder:
+            folder = Path(folder)
+            paths = [folder/n for n in ('response.json', 'cases.json', 'manifest.json')]
+            for path, value in zip(paths, (self.record, self.cases, self.manifest)):
+                path.write_text(json.dumps(value))
+            before = {p.name: p.read_bytes() for p in paths}
+            base = [sys.executable, str(ROOT/'rating_response.py'), str(paths[0])]
+            for options, status in [
+                (['--dataset', str(paths[1])], 2),
+                (['--manifest', str(paths[2])], 2),
+                (['--dataset', str(paths[1]), '--manifest', str(paths[2])], 0)]:
+                result = subprocess.run(base+options, cwd=folder, capture_output=True, text=True)
+                self.assertEqual(result.returncode, status, result.stderr)
+                if status == 0:
+                    self.assertIn('exact scope match', result.stdout)
+            self.assertEqual({p.name: p.read_bytes() for p in folder.iterdir()}, before)

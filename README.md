@@ -193,6 +193,8 @@ responses exist in the template, and the supplied examples are unblinded.
 Research validation and reviewed scoring decisions remain pending. A read-only
 [JSON response validator](docs/RESPONSE_FORMAT.md) distinguishes unanswered,
 assessed-unknown and numeric ratings without importing or scoring responses.
+Supply both `--dataset` and `--manifest` to also check the response fingerprint,
+case ID and exact scope against a verified synthetic dataset.
 
 ## Working now
 
@@ -203,7 +205,7 @@ assessed-unknown and numeric ratings without importing or scoring responses.
 - Separate component-floor checks so an average cannot hide a failed control requirement.
 - Weight sensitivity analysis and JSON/HTML report exports.
 - Side-by-side accessible JSON/HTML case comparison.
-- Strict dataset import, guarded editing and a read-only local viewer, 114 automated tests, and a GitHub
+- Strict dataset import, guarded editing and a read-only local viewer, 118 automated tests, and a GitHub
   Actions workflow.
 
 ## Full project scope

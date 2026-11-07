@@ -79,5 +79,7 @@ is supported by this template. Software tests establish software behavior only.
 
 Pending: willing second rater, reviewed anchors/weights/floors/thresholds, and
 an agreed evidence packet/protocol for any independent research exercise.
-Next software step: bind response identifiers to the verified synthetic packet
-and check source linkage. The current validator checks structure only.
+The response validator now supports optional dataset fingerprint, case ID and
+exact scope matching against a manifest-verified synthetic dataset. See its
+format documentation for the explicit dataset/manifest options. Next software
+step: structured source-reference validation; commit provenance remains unchecked.

@@ -7,6 +7,7 @@ import re
 from mhc import DIMENSIONS, unit
 from project import RISK_FIELDS
 from strict_json import load_json
+from dataset_manifest import verify_dataset
 
 
 def exact(obj, keys, label):
@@ -69,17 +70,45 @@ def validate_response(record):
     return counts
 
 
+
+def validate_response_dataset(record, cases, manifest):
+    """Match a response to an explicitly supplied, manifest-verified dataset."""
+    counts = validate_response(record)
+    identity = verify_dataset(cases, manifest)
+    if record['dataset_sha256'] != identity['dataset_sha256']:
+        raise ValueError('Response dataset fingerprint does not match verified dataset')
+    case = next((case for case in cases if case['id'] == record['case_id']), None)
+    if case is None:
+        raise ValueError('Response case ID is absent from verified dataset')
+    if record['scope'] != case['scope']:
+        raise ValueError('Response scope does not exactly match the selected case')
+    return counts
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('input', type=Path)
+    parser.add_argument('--dataset', type=Path, help='Explicit synthetic case dataset')
+    parser.add_argument('--manifest', type=Path, help='Manifest for the selected dataset')
     args = parser.parse_args()
+    if (args.dataset is None) != (args.manifest is None):
+        parser.error('--dataset and --manifest must be supplied together')
     try:
-        counts = validate_response(load_json(args.input))
-    except (ValueError, TypeError, OSError) as error:
+        record = load_json(args.input)
+        if args.dataset is None:
+            counts = validate_response(record)
+        else:
+            counts = validate_response_dataset(record, load_json(args.dataset),
+                                               load_json(args.manifest))
+    except (ValueError, TypeError, KeyError, AttributeError, OSError) as error:
         parser.error(str(error))
     print('Structurally valid synthetic practice response: ' +
           ', '.join(f'{key}={value}' for key, value in counts.items()))
-    print('No evidence, identity, independence, dates or scoring conventions verified; no files written.')
+    if args.dataset is not None:
+        print('Dataset fingerprint, case ID and exact scope match the supplied verified dataset.')
+    else:
+        print('Dataset identity not checked (no dataset/manifest supplied).')
+    print('No evidence, reviewer identity, independence, dates or scoring conventions verified; no files written.')
 
 
 if __name__ == '__main__':
