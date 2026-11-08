@@ -201,3 +201,12 @@ Do not use conference publication metadata as the project backlog. Scheduled wor
   selected case's source catalog. Free-text notes are not parsed as citations.
 - Repository commit provenance, independent review and scoring validation
   remain pending; research needs a second rater and agreed scoring/protocol choices.
+
+## 2026-11-07 checkpoint
+
+- Added schema-v2 source-ID lists and selected-case catalog membership checks.
+  Version 1 remains supported, explicitly without source-linkage validation.
+- Next: generate blank v2 response templates from a verified synthetic dataset,
+  preserving unanswered states without inventing reviewer identity or dates.
+- Source truth, commit provenance and independent research review remain pending.
+  Review needs a second rater and agreed scoring/protocol decisions.

@@ -1,4 +1,4 @@
-# Synthetic practice response format v1
+# Synthetic practice response formats v1 and v2
 
 Run `python rating_response.py /path/outside/checkout/response.json`.
 The command reads only, exits 0 for structurally valid partial or full records,
@@ -14,7 +14,7 @@ consent and protocol records separately.
 
 | Field | Requirement |
 |---|---|
-| schema_version | Integer 1 |
+| schema_version | Integer 1 or 2 |
 | synthetic | Boolean true |
 | case_id, scope, exposure | Nonempty strings; describe actual materials/exposure |
 | dataset_sha256 | 64 lowercase hexadecimal characters, parsed-input fingerprint |
@@ -55,7 +55,8 @@ commit, authenticate reviewer identity or date, verify independence, or check co
 record can still be fabricated or scientifically invalid. No real responses
 are shipped with this feature; test records are fabricated software fixtures.
 All rating anchors, weights, floors and thresholds remain unvalidated.
-Structured source linkage and repository-commit verification remain future work. Actual
+Repository-commit verification remains future work. Schema v2 supports the
+source linkage checks described below. Actual
 independent review needs a willing second rater and agreed scoring/protocol
 decisions.
 
@@ -78,3 +79,32 @@ still syntax-checked only. This mode does not compare reviewer ratings with
 example ratings, convert unanswered rows, or validate free-text evidence notes.
 It writes no files and keeps the same exit codes. Without these options, output
 explicitly states that dataset identity was not checked.
+
+
+## Version 2: structured citations
+
+Schema v1 remains supported unchanged; it has no structured citations and the
+CLI explicitly reports that source linkage was not checked. No automatic
+migration or citation extraction from free text is performed.
+
+For schema_version 2, every dimension must include one additional field,
+`source_ids`: a list of unique, nonempty strings. Unanswered rows require
+`[]`. Unknown and rated rows may cite sources or use `[]`; the evidence_note
+must still explain the supplied evidence or explicit absence of sources.
+A blank v2 dimension is:
+
+```json
+{"state":"unanswered","value":null,"confidence":null,"rationale":null,"evidence_note":null,"source_ids":[]}
+```
+
+With both dataset options, each ID must exist in the selected case's source
+catalog, even if it exists elsewhere in the dataset. The verified catalog holds
+titles, URLs and locators. Without dataset options only list structure is
+checked, and output explicitly says linkage was not checked.
+
+Membership does not prove that a source supports a rating, that its locator is
+correct, or that a URL is available. No URLs are fetched. An empty list is valid
+for synthetic practice and is not evidence of quality or completeness. Preserve
+original v1 responses; create a separate v2 copy only after actual citation
+review, retaining states and explanations. Do not infer citations from example
+ratings or fill answers on behalf of a reviewer.

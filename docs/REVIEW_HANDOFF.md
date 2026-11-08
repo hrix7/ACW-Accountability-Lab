@@ -81,5 +81,6 @@ Pending: willing second rater, reviewed anchors/weights/floors/thresholds, and
 an agreed evidence packet/protocol for any independent research exercise.
 The response validator now supports optional dataset fingerprint, case ID and
 exact scope matching against a manifest-verified synthetic dataset. See its
-format documentation for the explicit dataset/manifest options. Next software
-step: structured source-reference validation; commit provenance remains unchecked.
+format documentation for the explicit dataset/manifest options. Schema v2
+also validates source-ID membership in the selected case catalog. Source truth
+and commit provenance remain unchecked.

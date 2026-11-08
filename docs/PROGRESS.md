@@ -1,5 +1,24 @@
 # Progress log
 
+## 2026-11-07 — Structured response source references
+
+- Verified GitHub repository/README and clean published commit c0c02ab; read
+  current project documents and checked instruction paths (no AGENTS.md found).
+  Conference-Publications was untouched.
+- Added explicit schema v2 with per-dimension source_ids; rejects malformed,
+  duplicate and unanswered citations, and resolves IDs only against the selected
+  manifest-verified case. Schema v1 behavior is retained with explicit limits.
+- All 123 tests pass, including five new tests for valid/empty references,
+  cross-case and missing IDs, malformed lists, v1 compatibility and read-only CLI.
+  Dataset verification and whitespace checks pass.
+- Tests use fabricated software fixtures only. No reviewer responses, real-case
+  scores or private material were added. Synthetic labels, unknown/unanswered
+  states and unvalidated thresholds remain intact.
+- Prepared for GitHub publication; remote verification is reported in the run
+  result. Next: blank v2 template generation. Research review still needs a
+  second rater and reviewed scoring/protocol choices.
+
+
 ## 2026-11-06 — Response dataset identity checks
 
 - Verified repository/README and clean published commit 926f59b; read current

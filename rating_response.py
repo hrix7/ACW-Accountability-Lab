@@ -24,7 +24,7 @@ def validate_response(record):
     exact(record, ('schema_version', 'synthetic', 'case_id', 'scope',
                    'dataset_sha256', 'repository_commit', 'reviewer_alias',
                    'assessed_on', 'exposure', 'control', 'risk'), 'response')
-    if type(record['schema_version']) is not int or record['schema_version'] != 1:
+    if type(record['schema_version']) is not int or record['schema_version'] not in (1, 2):
         raise ValueError('Unsupported response schema')
     if record['synthetic'] is not True:
         raise ValueError('Only explicitly synthetic practice responses are supported')
@@ -39,7 +39,18 @@ def validate_response(record):
         for dimension in dimensions:
             item = record[group][dimension]
             label = f'{group}.{dimension}'
-            exact(item, ('state', 'value', 'confidence', 'rationale', 'evidence_note'), label)
+            fields = ('state', 'value', 'confidence', 'rationale', 'evidence_note')
+            if record['schema_version'] == 2:
+                fields += ('source_ids',)
+            exact(item, fields, label)
+            if record['schema_version'] == 2:
+                refs = item['source_ids']
+                if (not isinstance(refs, list) or
+                        any(not isinstance(ref, str) or not ref.strip() for ref in refs) or
+                        len(set(refs)) != len(refs)):
+                    raise ValueError(f'{label}: source_ids must be unique nonempty strings')
+                if item['state'] == 'unanswered' and refs:
+                    raise ValueError(f'{label}: unanswered source_ids must be empty')
             state = item['state']
             if not isinstance(state, str) or state not in counts:
                 raise ValueError(f'{label}: invalid state')
@@ -82,6 +93,12 @@ def validate_response_dataset(record, cases, manifest):
         raise ValueError('Response case ID is absent from verified dataset')
     if record['scope'] != case['scope']:
         raise ValueError('Response scope does not exactly match the selected case')
+    if record['schema_version'] == 2:
+        source_ids = {source['id'] for source in case['sources']}
+        for group in ('control', 'risk'):
+            for dimension, item in record[group].items():
+                if any(ref not in source_ids for ref in item['source_ids']):
+                    raise ValueError(f'{group}.{dimension}: source ID absent from selected case')
     return counts
 
 
@@ -108,6 +125,10 @@ def main():
         print('Dataset fingerprint, case ID and exact scope match the supplied verified dataset.')
     else:
         print('Dataset identity not checked (no dataset/manifest supplied).')
+    if record['schema_version'] == 2 and args.dataset is not None:
+        print('Structured source IDs match the selected case catalog; source truth not verified.')
+    else:
+        print('Source linkage not checked (requires schema v2 and dataset/manifest).')
     print('No evidence, reviewer identity, independence, dates or scoring conventions verified; no files written.')
 
 
