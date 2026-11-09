@@ -1,5 +1,24 @@
 # Progress log
 
+## 2026-11-09 — Blank synthetic response templates
+
+- Verified the standalone GitHub repository and README, clean baseline fc41306,
+  current roadmap/progress and applicable instruction paths (no AGENTS.md).
+  Conference-Publications was untouched.
+- Added explicit-packet v2 template generation with protected new-file export.
+  All eleven rows remain unanswered; reviewer identity/date remain null.
+  Dataset identity and scope are verified; commit syntax and supplied exposure
+  text do not establish provenance or actual reviewer participation.
+- All 128 tests pass, including five generation tests covering all cases, input
+  preservation, independent rows, invalid packet/metadata rejection, existing
+  files and symlinks, strict JSON and CLI round-trip validation. Dataset and
+  whitespace checks pass.
+- Synthetic labels and unvalidated thresholds are unchanged; no real responses,
+  private materials or real-case scores were added. Prepared for publication;
+  remote commit verification is reported in the run result.
+- Next: read-only response comparison using synthetic fixtures. Actual research
+  review needs a second rater and agreed scoring/protocol decisions.
+
 ## 2026-11-07 — Structured response source references
 
 - Verified GitHub repository/README and clean published commit c0c02ab; read

@@ -108,3 +108,28 @@ for synthetic practice and is not evidence of quality or completeness. Preserve
 original v1 responses; create a separate v2 copy only after actual citation
 review, retaining states and explanations. Do not infer citations from example
 ratings or fill answers on behalf of a reviewer.
+
+
+## Generate a blank v2 template
+
+From the intended trusted checkout, supply its full commit identifier and an
+explicit preparation/exposure description:
+
+```bash
+python response_template.py --dataset data/case_records.json --manifest data/synthetic_manifest.json --case-id synthetic-limited-control --repository-commit "$(git rev-parse HEAD)" --exposure "Preparation only; supplied examples are unblinded; reviewer exposure not yet recorded." --output /path/outside/checkout/blank-response.json
+```
+
+Replace the output path with a new file in an existing directory. The generator
+verifies the synthetic dataset and manifest, copies the selected case's exact
+scope, ID and dataset fingerprint, and validates the resulting v2 record before
+exclusive file creation. Existing files and symlinks are never replaced. Invalid
+inputs exit 2 without creating output; success exits 0.
+
+All eleven rows remain unanswered with null values, confidence, rationales and
+evidence notes, and empty source lists. Reviewer alias and assessment date are
+null. Example answers and citations are not copied. Generation does not blind
+materials or constitute a reviewer response. Record actual exposure, identity,
+date and answers only when review occurs, keeping actual responses outside the
+public checkout. The commit is syntax-checked only: this command does not verify
+that the supplied files belong to it. Exposure is supplied text, not an observed
+or authenticated event. Source truth and scoring conventions remain unvalidated.

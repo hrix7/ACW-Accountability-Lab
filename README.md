@@ -196,7 +196,10 @@ assessed-unknown and numeric ratings without importing or scoring responses.
 Supply both `--dataset` and `--manifest` to also check the response fingerprint,
 case ID and exact scope against a verified synthetic dataset. Schema v2 also
 checks structured source IDs against the selected case catalog; v1 remains
-supported without source-linkage checks.
+supported without source-linkage checks. Generate an entirely unanswered v2
+template with `response_template.py`; see the [generation instructions](docs/RESPONSE_FORMAT.md#generate-a-blank-v2-template).
+Explicit packet, case, commit and exposure inputs are required; existing files
+cannot be replaced. No reviewer identity, date or answers are inferred.
 
 ## Working now
 
@@ -207,7 +210,7 @@ supported without source-linkage checks.
 - Separate component-floor checks so an average cannot hide a failed control requirement.
 - Weight sensitivity analysis and JSON/HTML report exports.
 - Side-by-side accessible JSON/HTML case comparison.
-- Strict dataset import, guarded editing and a read-only local viewer, 123 automated tests, and a GitHub
+- Strict dataset import, guarded editing and a read-only local viewer, 128 automated tests, and a GitHub
   Actions workflow.
 
 ## Full project scope

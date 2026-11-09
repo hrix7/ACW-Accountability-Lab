@@ -210,3 +210,16 @@ Do not use conference publication metadata as the project backlog. Scheduled wor
   preserving unanswered states without inventing reviewer identity or dates.
 - Source truth, commit provenance and independent research review remain pending.
   Review needs a second rater and agreed scoring/protocol decisions.
+
+
+## 2026-11-09 checkpoint
+
+- Added blank v2 response generation from an explicitly selected verified
+  synthetic packet, with eleven unanswered rows and no reviewer identity/date.
+- Explicit commit and exposure text are required; existing files and symlinks
+  are protected. Commit provenance remains syntax-only, not authenticated.
+- Next: read-only comparison of two validated synthetic response records,
+  separating unanswered, unknown and numeric disagreements without consensus
+  or aggregate ordinal scores. Use synthetic test fixtures only until review.
+- Actual review remains pending a second rater and agreed scoring/protocol
+  decisions; no independent responses or research validation are claimed.
