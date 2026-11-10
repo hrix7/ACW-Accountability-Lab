@@ -223,3 +223,14 @@ Do not use conference publication metadata as the project backlog. Scheduled wor
   or aggregate ordinal scores. Use synthetic test fixtures only until review.
 - Actual review remains pending a second rater and agreed scoring/protocol
   decisions; no independent responses or research validation are claimed.
+
+
+## 2026-11-09 response comparison follow-up
+
+- Added read-only comparison of two validated synthetic response records with
+  six explicit state/value categories, separate control/risk counts, full rows
+  and supplied metadata. No consensus, aggregate score or independence inferred.
+- Next: a readable local comparison report with dimension navigation and
+  explicit state labels, retaining the same packet checks and limitations.
+- Actual independent review remains pending a second rater and agreed scenario,
+  evidence packet, protocol, numeric anchors, weights, floors and thresholds.

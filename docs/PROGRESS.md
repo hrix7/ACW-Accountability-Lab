@@ -1,5 +1,24 @@
 # Progress log
 
+## 2026-11-09 — Read-only synthetic response comparison
+
+- Verified GitHub repository/README and clean baseline be9da36; read current
+  README, roadmap, progress and instruction paths (no AGENTS.md found).
+  Conference-Publications was untouched.
+- Added comparison with mandatory packet verification and matching case/scope,
+  dataset fingerprint and commit string. Six state/value categories preserve
+  unanswered, unknown and numeric distinctions; full rows retain explanations.
+- All 134 tests pass, including six new tests for all state pairs, symmetry,
+  numeric differences, input preservation, packet mismatch, invalid ratings and
+  citations, mixed schemas, blank records and strict read-only CLI behavior.
+  Dataset verification and whitespace checks pass.
+- Only fabricated software fixtures were used; no actual reviewer responses,
+  private materials or real-case scores were added. Synthetic labels and
+  unvalidated thresholds remain intact. Prepared for GitHub publication; remote
+  verification is reported in the run result.
+- Next: readable local comparison report. Research review remains pending a
+  second rater and agreed evidence/scoring/protocol decisions.
+
 ## 2026-11-09 — Blank synthetic response templates
 
 - Verified the standalone GitHub repository and README, clean baseline fc41306,

@@ -133,3 +133,44 @@ date and answers only when review occurs, keeping actual responses outside the
 public checkout. The commit is syntax-checked only: this command does not verify
 that the supplied files belong to it. Exposure is supplied text, not an observed
 or authenticated event. Source truth and scoring conventions remain unvalidated.
+
+
+## Compare two synthetic practice responses
+
+```bash
+python response_compare.py /path/outside/checkout/left.json /path/outside/checkout/right.json --dataset data/case_records.json --manifest data/synthetic_manifest.json
+```
+
+The command validates both records against the explicit synthetic dataset and
+manifest, including v2 citation membership, then requires the same case ID,
+exact scope, dataset fingerprint and repository commit string. A different
+commit is rejected even when data match: review the handoff before comparison.
+Commit equality does not verify that either record came from that commit.
+Versions 1 and 2 can be compared; output identifies which side received source
+linkage checks. V1 has no structured citations, not an inferred empty list.
+
+JSON goes to stdout only; no files are created or changed. Success exits 0;
+invalid input exits 2 with no JSON output. Keep responses and any redirected
+comparison output outside the public checkout: output includes supplied reviewer
+metadata, exposure text and complete per-dimension explanations and citations.
+Left and right mean command argument order, not verified reviewer identities.
+
+Each dimension has one descriptive status:
+
+| Status | Meaning |
+|---|---|
+| both_unanswered | Neither row has been answered |
+| one_unanswered | Exactly one row is unanswered; the other may be unknown or rated |
+| both_unknown | Both deliberately record unknown; explanations may differ |
+| unknown_vs_rated | One row records unknown, the other a numeric rating |
+| equal_rated | Both numeric values are exactly equal, with no tolerance |
+| different_rated | Both numeric values are present and unequal |
+
+Counts are separate for the five control and six risk dimensions. No numeric
+differences, averages, aggregate risk scores, agreement percentages or consensus
+are calculated. Equal numeric values (including zero) do not mean equal
+rationales, confidence, evidence or independent agreement. Unknown and unanswered
+are never converted to numeric values. Reviewer identity, independence, supplied
+dates/exposure, source truth and scoring validity remain unverified. Same-alias
+records and blank templates are allowed for software practice, not evidence of
+two independent raters. All thresholds remain unvalidated.
