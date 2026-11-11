@@ -1,5 +1,24 @@
 # Progress log
 
+## 2026-11-10 — Readable synthetic response comparison
+
+- Verified standalone GitHub repository/README and clean baseline 1d18842; read
+  current project documents and instruction paths (no AGENTS.md found).
+  Conference-Publications was untouched.
+- Added HTML output to the existing comparison CLI, preserving packet validation
+  and JSON defaults. Includes eleven dimension links, evidence tables, supplied
+  metadata, separate category counts and explicit interpretation limits.
+- All 138 tests pass, including four new checks for navigation/table structure,
+  escaping, input preservation, unknown/unanswered/zero labels, mixed schemas,
+  and read-only CLI success and mismatch rejection. Dataset verification and
+  whitespace checks pass. Manual accessibility review remains pending.
+- Synthetic labels and unvalidated thresholds remain intact; only fabricated
+  software fixtures were used. No actual reviewer responses, private materials
+  or real-case scores were added. Prepared for GitHub publication; remote
+  verification is reported in the run result.
+- Next: response-input fingerprints for reproducibility. Actual review needs a
+  second rater and agreed evidence, scoring and protocol decisions.
+
 ## 2026-11-09 — Read-only synthetic response comparison
 
 - Verified GitHub repository/README and clean baseline be9da36; read current

@@ -174,3 +174,28 @@ are never converted to numeric values. Reviewer identity, independence, supplied
 dates/exposure, source truth and scoring validity remain unverified. Same-alias
 records and blank templates are allowed for software practice, not evidence of
 two independent raters. All thresholds remain unvalidated.
+
+
+## Readable local comparison report
+
+Add `--format html` to the comparison command. JSON remains the default.
+For a local file, enable shell no-clobber protection before redirecting stdout:
+
+```bash
+(set -C; python response_compare.py /path/outside/checkout/left.json /path/outside/checkout/right.json --dataset data/case_records.json --manifest data/synthetic_manifest.json --format html > /path/outside/checkout/comparison.html)
+```
+
+Open the resulting file locally. Dimension links lead to eleven side-by-side
+response tables, retaining states, values, confidence, rationales, evidence notes
+and source IDs. Metadata and separate control/risk category counts precede them.
+Unknown, unanswered, numeric zero, absent v1 citations and empty v2 citation lists
+have distinct labels. The report retains all comparison limitations and does not
+claim consensus, independence or validated thresholds.
+
+The same packet validation runs before either output format. The program writes
+only stdout; shell redirection can create an empty file even when validation
+fails, so check the exit status. Supplied text is HTML-escaped; the self-contained
+report has no scripts, external resources or source-fetching behavior. Keep it
+outside the public checkout because it contains supplied response metadata and
+explanations. Automated checks cover links, headers, captions, escaping and CLI
+behavior; manual keyboard, zoom and screen-reader review remains pending.

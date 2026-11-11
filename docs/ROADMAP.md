@@ -234,3 +234,13 @@ Do not use conference publication metadata as the project backlog. Scheduled wor
   explicit state labels, retaining the same packet checks and limitations.
 - Actual independent review remains pending a second rater and agreed scenario,
   evidence packet, protocol, numeric anchors, weights, floors and thresholds.
+
+
+## 2026-11-10 checkpoint
+
+- Added local HTML response comparison with dimension navigation, explicit state
+  labels, side-by-side evidence and metadata, and retained validation limits.
+- Next: reproducible response-input fingerprints in JSON/HTML comparisons so
+  retained reports can be matched to exact parsed response records.
+- Manual accessibility review remains pending. Independent research still needs
+  a second rater and agreed evidence, scoring and protocol decisions.

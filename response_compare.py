@@ -8,6 +8,7 @@ from mhc import DIMENSIONS
 from project import RISK_FIELDS
 from rating_response import validate_response_dataset
 from strict_json import load_json
+from response_report import render_html
 
 STATUSES = ('both_unanswered', 'one_unanswered', 'both_unknown',
             'unknown_vs_rated', 'equal_rated', 'different_rated')
@@ -67,13 +68,15 @@ def main():
     parser.add_argument('right', type=Path)
     parser.add_argument('--dataset', type=Path, required=True)
     parser.add_argument('--manifest', type=Path, required=True)
+    parser.add_argument('--format', choices=('json', 'html'), default='json')
     args = parser.parse_args()
     try:
         result = compare_responses(load_json(args.left), load_json(args.right),
                                    load_json(args.dataset), load_json(args.manifest))
     except (ValueError, TypeError, KeyError, AttributeError, OSError) as error:
         parser.error(str(error))
-    print(json.dumps(result, indent=2, ensure_ascii=False, allow_nan=False))
+    print(render_html(result) if args.format == 'html' else
+          json.dumps(result, indent=2, ensure_ascii=False, allow_nan=False))
 
 
 if __name__ == '__main__':
