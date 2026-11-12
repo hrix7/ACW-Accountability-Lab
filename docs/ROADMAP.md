@@ -244,3 +244,13 @@ Do not use conference publication metadata as the project backlog. Scheduled wor
   retained reports can be matched to exact parsed response records.
 - Manual accessibility review remains pending. Independent research still needs
   a second rater and agreed evidence, scoring and protocol decisions.
+
+
+## 2026-11-11 checkpoint
+
+- Added complete left/right response fingerprints to JSON and HTML comparisons
+  using the existing parsed-input convention, with explicit authenticity limits.
+- Next: a read-only check that a retained JSON comparison reproduces from its
+  supplied responses and verified dataset, rejecting changed report contents.
+- Manual accessibility review remains pending. Independent research validation
+  needs a second rater and agreed evidence, scoring and protocol decisions.

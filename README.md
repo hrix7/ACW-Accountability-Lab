@@ -205,6 +205,8 @@ that separates unanswered, unknown and numeric differences without consensus
 scoring. Both records must match the same verified synthetic packet.
 Add `--format html` for a local report with dimension navigation and side-by-side
 evidence tables; see the [report instructions](docs/RESPONSE_FORMAT.md#readable-local-comparison-report).
+Both formats include [response-input fingerprints](docs/RESPONSE_FORMAT.md#response-input-fingerprints)
+for matching retained records; fingerprints do not authenticate reviewer claims.
 
 ## Working now
 
@@ -215,7 +217,7 @@ evidence tables; see the [report instructions](docs/RESPONSE_FORMAT.md#readable-
 - Separate component-floor checks so an average cannot hide a failed control requirement.
 - Weight sensitivity analysis and JSON/HTML report exports.
 - Side-by-side accessible JSON/HTML case comparison.
-- Strict dataset import, guarded editing and a read-only local viewer, 138 automated tests, and a GitHub
+- Strict dataset import, guarded editing and a read-only local viewer, 142 automated tests, and a GitHub
   Actions workflow.
 
 ## Full project scope

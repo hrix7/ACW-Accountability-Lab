@@ -199,3 +199,28 @@ report has no scripts, external resources or source-fetching behavior. Keep it
 outside the public checkout because it contains supplied response metadata and
 explanations. Automated checks cover links, headers, captions, escaping and CLI
 behavior; manual keyboard, zoom and screen-reader review remains pending.
+
+
+## Response-input fingerprints
+
+New JSON comparisons include `response_provenance` (schema version 1), and HTML
+shows the same object under Reproducibility metadata. `left_sha256` and
+`right_sha256` cover each complete validated response, including supplied
+metadata, states, numeric values, explanations and v2 source-ID lists. Left and
+right follow argument order. Identical records have identical hashes; that does
+not establish independent review. Older comparisons lack this optional metadata
+and cannot establish response identity from it.
+
+The format `sha256-python-json-sort-keys-compact-utf8-v1` uses the project's
+existing parsed-input convention: sorted object keys, compact Python JSON,
+unescaped Unicode, UTF-8 and no nonfinite numbers. Whitespace and object key
+order do not matter; array order, text, schema and numeric representation
+(e.g. 0 versus 0.0) do. This is not a hash of original file bytes.
+
+Retain both response files, the verified dataset/manifest, and the software
+revision used. Rerun the comparison in the same argument order and compare both
+response hashes and the dataset fingerprint. The response's repository_commit
+is a supplied handoff identifier, not automatic capture of the running software.
+Hashes do not authenticate reviewers, source truth, consent or independence;
+changing records and hashes together can produce a match. Thresholds and scoring
+remain unvalidated. Keep retained responses and reports outside public commits.

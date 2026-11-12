@@ -1,5 +1,24 @@
 # Progress log
 
+## 2026-11-11 — Response-input reproducibility fingerprints
+
+- Verified standalone repository/README and clean published baseline 4f3bd6d;
+  read current README, roadmap, progress and applicable instruction paths
+  (no AGENTS.md found). Conference-Publications was untouched.
+- Reused the existing SHA-256 parsed-input convention for complete left/right
+  response records after validation. JSON and HTML expose matching provenance
+  with explicit limits; older HTML rendering tolerates absent metadata.
+- All 142 tests pass, including four new tests covering the serialization
+  convention, reordered keys, side order, input preservation, metadata and
+  answer changes, unknown versus zero, numeric representation, v1 support and
+  matching read-only CLI outputs. Dataset and whitespace checks pass.
+- Synthetic labels and unvalidated thresholds are preserved. Tests use only
+  fabricated software fixtures; no real responses, private materials or
+  real-case scores were added. Prepared for publication; remote verification
+  is reported in the run result.
+- Next: retained-comparison reproduction checks. Research validation remains
+  pending a second rater and agreed evidence, scoring and protocol decisions.
+
 ## 2026-11-10 — Readable synthetic response comparison
 
 - Verified standalone GitHub repository/README and clean baseline 1d18842; read

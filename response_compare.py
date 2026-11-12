@@ -9,6 +9,7 @@ from project import RISK_FIELDS
 from rating_response import validate_response_dataset
 from strict_json import load_json
 from response_report import render_html
+from provenance import fingerprint
 
 STATUSES = ('both_unanswered', 'one_unanswered', 'both_unknown',
             'unknown_vs_rated', 'equal_rated', 'different_rated')
@@ -25,6 +26,15 @@ def compare_responses(left, right, cases, manifest):
                   case_id=left['case_id'], scope=left['scope'],
                   dataset_sha256=left['dataset_sha256'],
                   repository_commit=left['repository_commit'])
+    result['response_provenance'] = {
+        'schema_version': 1,
+        'fingerprint_format': 'sha256-python-json-sort-keys-compact-utf8-v1',
+        'left_sha256': fingerprint(left),
+        'right_sha256': fingerprint(right),
+        'notice': ('Fingerprints identify complete parsed response records, not original '
+                   'file bytes, reviewer authenticity or source truth. Retain both inputs '
+                   'and the software revision used to reproduce this comparison.'),
+    }
     result['limitations'] = (
         'Descriptive state/value comparison only; equal values do not establish consensus. '
         'No reviewer identity, independence, dates, exposure, source truth, commit provenance '

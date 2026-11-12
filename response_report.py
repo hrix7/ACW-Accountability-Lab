@@ -1,5 +1,6 @@
 """HTML presentation for validated synthetic response comparisons."""
 from html import escape
+from provenance import render_provenance
 
 
 def shown(value):
@@ -20,6 +21,7 @@ section{margin-top:2rem}nav li{display:inline-block;margin-right:1rem}h2,h3{scro
 </style></head><body><a href="#main">Skip to comparison</a><main id="main">
 <h1>Synthetic response comparison</h1>''']
     parts.append('<p>' + shown(result['limitations']) + '</p>')
+    parts.append(render_provenance(result.get('response_provenance')))
     parts.append('<p>Left and right follow input order. Supplied metadata is not authenticated. '
                  'Keep responses and this report outside the public checkout.</p><dl>')
     for key in ('case_id', 'scope', 'dataset_sha256', 'repository_commit'):
